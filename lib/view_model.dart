@@ -1,18 +1,15 @@
-import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
+import 'package:delikat_h_c_mobile/domain/repository/goods_repository.dart';
 import 'package:flutter/material.dart';
 
-import 'data.dart';
-
 class ViewModel extends ChangeNotifier {
-  List<Product> _products = [];
-  List<Product> get products => _products;
+  var goodsRepository = GoodsRepository();
 
   ViewModel() {
     LoadValue();
   }
 
   void LoadValue() async {
-    _products = allData;
+    await goodsRepository.initialize();
     notifyListeners();
   }
 }

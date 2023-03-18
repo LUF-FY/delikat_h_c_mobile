@@ -1,14 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:delikat_h_c_mobile/domain/entity/goods.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:flutter/material.dart';
 
 class ProductCradWidget extends StatelessWidget {
   ProductCradWidget({
     Key? key,
-    required this.product,
+    required this.goods,
   }) : super(key: key);
 
-  Product? product;
+  Goods? goods;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class ProductCradWidget extends StatelessWidget {
               Container(
                 height: 150,
                 padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: ProductImageWidget(img: product!.img),
+                child: ProductImageWidget(img: goods!.product.img),
               ),
               Container(
                 height: 100,
@@ -47,7 +48,7 @@ class ProductCradWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Center(
-                          child: ProductNameWidget(name: product!.name),
+                          child: ProductNameWidget(name: goods!.product.name),
                         ),
                       ),
                     ),
@@ -55,10 +56,10 @@ class ProductCradWidget extends StatelessWidget {
                       height: 24,
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
-                        child: ProductPriceWidget(price: product!.price),
+                        child: ProductPriceWidget(price: goods!.product.price),
                       ),
                     ),
-                    ProductCardButtons(),
+                    ProductCardButtons(quantity: goods!.quantity),
                   ],
                 ),
               ),
@@ -125,11 +126,12 @@ class ProductPriceWidget extends StatelessWidget {
 }
 
 class ProductCardButtons extends StatelessWidget {
-  const ProductCardButtons({
+  ProductCardButtons({
     Key? key,
+    required this.quantity,
   }) : super(key: key);
 
-  final quantity = 0;
+  int quantity;
 
   @override
   Widget build(BuildContext context) {

@@ -42,9 +42,11 @@ class MainPage extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             //print("build");
-            return ProductCradWidget(product: viewModel.products[index]);
+            return ProductCradWidget(
+              goods: viewModel.goodsRepository.goods[index],
+            );
           },
-          itemCount: viewModel.products.length,
+          itemCount: viewModel.goodsRepository.goods.length,
         ),
       ),
     );

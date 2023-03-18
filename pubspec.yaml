@@ -10,6 +10,7 @@ dependencies:
   auto_size_text: ^3.0.0
   flutter:
     sdk: flutter
+  http: ^0.13.5
   json_annotation: ^4.8.0
   provider: ^6.0.5
 
