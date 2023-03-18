@@ -1,6 +1,7 @@
+import 'dart:ffi';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/goods.dart';
-import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:flutter/material.dart';
 
 class ProductCradWidget extends StatelessWidget {
@@ -9,7 +10,7 @@ class ProductCradWidget extends StatelessWidget {
     required this.goods,
   }) : super(key: key);
 
-  Goods? goods;
+  Goods goods;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ProductCradWidget extends StatelessWidget {
       //     );
       //   }));
       // },
-      child: Container(
+      child: SizedBox(
         height: 250,
         child: Card(
           elevation: 2,
@@ -35,31 +36,31 @@ class ProductCradWidget extends StatelessWidget {
             children: [
               Container(
                 height: 150,
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: ProductImageWidget(img: goods!.product.img),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: ProductImageWidget(img: goods.product.img),
               ),
-              Container(
+              SizedBox(
                 height: 100,
                 child: Column(
                   children: [
-                    Divider(height: 6),
-                    Container(
+                    const Divider(height: 6),
+                    SizedBox(
                       height: 24,
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Center(
-                          child: ProductNameWidget(name: goods!.product.name),
+                          child: ProductNameWidget(name: goods.product.name),
                         ),
                       ),
                     ),
-                    Container(
+                    SizedBox(
                       height: 24,
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
-                        child: ProductPriceWidget(price: goods!.product.price),
+                        child: ProductPriceWidget(price: goods.product.price),
                       ),
                     ),
-                    ProductCardButtons(quantity: goods!.quantity),
+                    ProductCardButtons(quantity: goods.quantity),
                   ],
                 ),
               ),
@@ -83,7 +84,7 @@ class ProductImageWidget extends StatelessWidget {
       //child: Image.asset('assets/$img.png'),
       child: const Image(
         image: NetworkImage(
-            'https://www.zooparc.nl/wp-content/uploads/2016/07/dieren-zooparc-capybara.jpg'),
+            'https://na-dostupnom.ru/wp-content/uploads/2021/12/aHpnkCFosvI.jpg.webp'),
       ),
     );
   }
@@ -135,7 +136,7 @@ class ProductCardButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 40,
       //color: Colors.red,
       child: Row(
@@ -144,7 +145,7 @@ class ProductCardButtons extends StatelessWidget {
           ProductCardQuantityChangeButton(
             text: '-',
           ),
-          Container(
+          SizedBox(
             width: 40,
             child: Center(child: Text('$quantity')),
           ),
