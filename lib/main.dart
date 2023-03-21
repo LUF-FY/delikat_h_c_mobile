@@ -1,4 +1,5 @@
-import 'package:delikat_h_c_mobile/ui/widgets/main_page.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/cart_screen.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/main_screen.dart';
 import 'package:delikat_h_c_mobile/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,8 +31,9 @@ class MainApp extends StatelessWidget {
       routes: {
         '/': (context) => ChangeNotifierProvider(
               create: (_) => ViewModel(),
-              child: const MainPage(),
+              child: const MainScreen(),
             ),
+        '/cart': (context) => CartScreen(),
       },
     );
   }

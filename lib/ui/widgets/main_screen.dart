@@ -1,10 +1,10 @@
-import 'package:delikat_h_c_mobile/ui/widgets/product_card_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
 import 'package:delikat_h_c_mobile/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+class MainScreen extends StatelessWidget {
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +42,7 @@ class MainPage extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             //print("build");
-            return ProductCradWidget(
+            return ProductCatalogWidget(
               goods: viewModel.goodsRepository.goods[index],
             );
           },
@@ -101,7 +101,9 @@ class IconButtonCart extends StatelessWidget {
     return IconButton(
 // По нажатию переходить на страницу корзины
 
-      onPressed: (() {}),
+      onPressed: (() {
+        Navigator.pushNamed(context, '/cart');
+      }),
       icon: const Icon(
         Icons.shopping_cart,
         color: Colors.black,

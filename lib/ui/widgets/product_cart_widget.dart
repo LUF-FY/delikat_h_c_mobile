@@ -1,11 +1,9 @@
-import 'dart:ffi';
-
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/goods.dart';
 import 'package:flutter/material.dart';
 
-class ProductCradWidget extends StatelessWidget {
-  ProductCradWidget({
+class ProductCartWidget extends StatelessWidget {
+  ProductCartWidget({
     Key? key,
     required this.goods,
   }) : super(key: key);
@@ -14,16 +12,21 @@ class ProductCradWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //     return ProductDetail(
-      //       product: _product,
-      //     );
-      //   }));
-      // },
-      child: SizedBox(
-        height: 250,
+    return Container(
+      color: Colors.red,
+      height: 100,
+      child: GestureDetector(
+        // onTap: () {
+        //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //     return ProductDetail(
+        //       product: _product,
+        //     );
+        //   }));
+        // },
+        onTap: () {
+          print(goods.toString());
+        },
+
         child: Card(
           elevation: 2,
           shadowColor: Colors.green,
@@ -31,13 +34,14 @@ class ProductCradWidget extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                height: 150,
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ProductImageWidget(img: goods.product.img),
+                height: 84,
+                width: 84,
+                padding: const EdgeInsets.all(8.0),
+                child: ProductImageWidget(img: goods.product.image),
               ),
               SizedBox(
                 height: 100,
@@ -79,13 +83,14 @@ class ProductImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Hero(
-      tag: img,
+    return Container(
+      //child: Hero(
+      //tag: img,
       //child: Image.asset('assets/$img.png'),
-      child: const Image(
-        image: NetworkImage(
-            'https://na-dostupnom.ru/wp-content/uploads/2021/12/aHpnkCFosvI.jpg.webp'),
+      child: Image(
+        image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
       ),
+      //),
     );
   }
 }

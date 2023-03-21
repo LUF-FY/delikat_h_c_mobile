@@ -8,4 +8,9 @@ class Goods {
     required this.product,
     required this.quantity,
   });
+
+  @override
+  String toString() {
+    return 'Goods(product: ${product.toString()},\n quantity: $quantity)';
+  }
 }

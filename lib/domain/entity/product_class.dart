@@ -6,7 +6,7 @@ part 'product_class.g.dart';
 class Product {
   final int id;
   final String name;
-  final String img;
+  final String image;
   final String description;
   final int price;
 
@@ -14,7 +14,7 @@ class Product {
     required this.id,
     required this.name,
     required this.price,
-    required this.img,
+    required this.image,
     required this.description,
   });
 
@@ -22,4 +22,9 @@ class Product {
       _$ProductFromJson(json);
 
   Map<String, dynamic> toJson() => _$ProductToJson(this);
+
+  @override
+  String toString() {
+    return 'Product(id: $id,\n name: $name,\n image: $image,\n description: $description,\n price: $price)';
+  }
 }

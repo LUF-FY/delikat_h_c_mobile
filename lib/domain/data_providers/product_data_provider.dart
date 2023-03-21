@@ -18,7 +18,9 @@ class ProductDataProvider {
     if (response.statusCode == 200) {
       var productsJson = json.decode(response.body);
       for (var productJson in productsJson) {
-        products.add(Product.fromJson(productJson));
+        var prod = Product.fromJson(productJson);
+        print(prod);
+        products.add(prod);
       }
     }
   }
