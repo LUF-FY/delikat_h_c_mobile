@@ -8,10 +8,10 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final viewModel = context.watch<ViewModel>();
+    final goodsList = context.select((ViewModel vm) => vm.goodsList);
     return Scaffold(
       appBar: AppBar(
-        elevation: 1,
+        elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
         // leading: IconButton(
         //   onPressed: (() {}),
@@ -20,6 +20,7 @@ class MainScreen extends StatelessWidget {
         //     color: Colors.black,
         //   ),
         // ),
+        centerTitle: true,
         title: const Text(
           'Delikat',
           style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
@@ -41,12 +42,11 @@ class MainScreen extends StatelessWidget {
             childAspectRatio: 0.6,
           ),
           itemBuilder: (context, index) {
-            //print("build");
             return ProductCatalogWidget(
-              goods: viewModel.goodsRepository.goods[index],
+              goods: goodsList[index],
             );
           },
-          itemCount: viewModel.goodsRepository.goods.length,
+          itemCount: goodsList.length,
         ),
       ),
     );

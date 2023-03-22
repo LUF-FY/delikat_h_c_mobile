@@ -38,6 +38,7 @@ class CartScreen extends StatelessWidget {
             crossAxisSpacing: 10,
             crossAxisCount: 1,
             childAspectRatio: 0.6,
+          
           ),
           itemBuilder: (context, index) {
             //print("build");
