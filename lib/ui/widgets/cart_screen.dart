@@ -30,25 +30,24 @@ class CartScreen extends StatelessWidget {
         //   ),
         // ],
       ),
-      body: Container(
-        padding: const EdgeInsets.all(10),
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 10,
-            crossAxisSpacing: 10,
-            crossAxisCount: 1,
-            childAspectRatio: 0.6,
-          
-          ),
-          itemBuilder: (context, index) {
-            //print("build");
-            return ProductCartWidget(
-              goods: GoodsData[index],
-            );
-          },
-          itemCount: GoodsData.length,
-        ),
-      ),
+      // body: Container(
+      //   padding: const EdgeInsets.all(10),
+      //   child: GridView.builder(
+      //     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      //       mainAxisSpacing: 10,
+      //       crossAxisSpacing: 10,
+      //       crossAxisCount: 1,
+      //       childAspectRatio: 0.6,
+      //     ),
+      //     itemBuilder: (context, index) {
+      //       //print("build");
+      //       return ProductCartWidget(
+      //         goods: GoodsData[index],
+      //       );
+      //     },
+      //     itemCount: GoodsData.length,
+      //   ),
+      // ),
     );
   }
 }

@@ -1,27 +1,20 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delikat_h_c_mobile/domain/entity/goods.dart';
+import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:flutter/material.dart';
 
 class ProductCatalogWidget extends StatelessWidget {
   ProductCatalogWidget({
     Key? key,
-    required this.goods,
+    required this.product,
   }) : super(key: key);
 
-  Goods goods;
+  Product product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      // onTap: () {
-      //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-      //     return ProductDetail(
-      //       product: _product,
-      //     );
-      //   }));
-      // },
       onTap: () {
-        print(goods.toString());
+        print(product.toString());
       },
       child: SizedBox(
         height: 250,
@@ -38,7 +31,7 @@ class ProductCatalogWidget extends StatelessWidget {
               Container(
                 height: 150,
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ProductImageWidget(img: goods.product.image),
+                child: ProductImageWidget(img: product.image),
               ),
               SizedBox(
                 height: 100,
@@ -50,18 +43,24 @@ class ProductCatalogWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Center(
-                          child: ProductNameWidget(name: goods.product.name),
+                          child: ProductNameWidget(name: product.name),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 24,
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: ProductPriceWidget(price: goods.product.price),
-                      ),
-                    ),
-                    ProductCardButtons(quantity: goods.quantity),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          height: 24,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ProductPriceWidget(price: product.price),
+                          ),
+                        ),
+                        //ProductCardButtons(quantity: goods.quantity),
+                        ProductCardBuyButton(),
+                      ],
+                    )
                   ],
                 ),
               ),
@@ -118,7 +117,7 @@ class ProductPriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '$price₽',
+      '${price}₽',
       style: const TextStyle(
         color: Colors.green,
         fontSize: 18,
@@ -140,7 +139,6 @@ class ProductCardButtons extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 40,
-      //color: Colors.red,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
@@ -156,31 +154,6 @@ class ProductCardButtons extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class ProductCardBuyButton extends StatelessWidget {
-  const ProductCardBuyButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style:
-          ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)),
-      // child: const Icon(
-      //   Icons.add_shopping_cart,
-      //   size: 20,
-      //   color: Colors.white,
-      // ),
-      child: const Text(
-        "Buy",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
-      ),
-      onPressed: () {},
     );
   }
 }
@@ -207,6 +180,26 @@ class ProductCardQuantityChangeButton extends StatelessWidget {
         ),
         onPressed: () {},
       ),
+    );
+  }
+}
+
+class ProductCardBuyButton extends StatelessWidget {
+  const ProductCardBuyButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton(
+      style:
+          ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)),
+      child: const Text(
+        "Buy",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 16,
+        ),
+      ),
+      onPressed: () {},
     );
   }
 }
