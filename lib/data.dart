@@ -1,15 +1,15 @@
 import 'package:delikat_h_c_mobile/domain/entity/goods.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 
-final List<Product> ProductData = [
-  Product(
+final List<Cartitem> ProductData = [
+  Cartitem(
     id: 1,
     name: 'Эрик будущий депутат',
     price: 0,
     image: '/images/products/wolf.png',
     description: 'Любит тяночек',
   ),
-  Product(
+  Cartitem(
     id: 2,
     name: 'OLINA',
     price: 6,
