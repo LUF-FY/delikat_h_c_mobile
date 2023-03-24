@@ -1,4 +1,4 @@
-import 'package:delikat_h_c_mobile/domain/services/bottom_bar_selection_service.dart';
+import 'package:delikat_h_c_mobile/domain/services/page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/main_screen.dart';
@@ -18,7 +18,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => BottomBarSelectionService()),
+        ChangeNotifierProvider(create: (_) => PageSelectionService()),
         ChangeNotifierProvider(create: (_) => ProductService()),
         ChangeNotifierProvider(create: (_) => ShoppingCartService()),
       ],
@@ -36,11 +36,10 @@ class MainApp extends StatelessWidget {
             bodyMedium: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w800),
           ),
         ),
-        initialRoute: '/',
-        navigatorKey: Utils.mainAppNav,
+        initialRoute: '/splash',
         routes: {
-          '/': (context) => SplashScreen(),
-          '/main': (context) => MainScreen(),
+          '/splash': (context) => SplashScreen(),
+          '/': (context) => MainScreen(),
         },
       ),
     );

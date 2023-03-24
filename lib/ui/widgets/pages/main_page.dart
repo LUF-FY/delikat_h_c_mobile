@@ -8,24 +8,16 @@ class MainPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ProductGridView(),
-    );
+    return ProductGridView();
   }
 }
 
-class ProductGridView extends StatefulWidget {
+class ProductGridView extends StatelessWidget {
   const ProductGridView({Key? key}) : super(key: key);
 
   @override
-  _ProductGridViewState createState() => _ProductGridViewState();
-}
-
-class _ProductGridViewState extends State<ProductGridView> {
-  @override
   Widget build(BuildContext context) {
     final productList = context.select((ProductService ps) => ps.productsList);
-
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 10,

@@ -3,14 +3,26 @@ import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SplashScreen extends StatelessWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  var _isSplashScreenBuilt = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     var _isLoaded = context.select((ProductService ps) => ps.isLoaded);
     if (_isLoaded) {
-      Utils.mainAppNav.currentState!.pushReplacementNamed('/main');
+      Navigator.of(context).pop();
     }
 
     return Scaffold(

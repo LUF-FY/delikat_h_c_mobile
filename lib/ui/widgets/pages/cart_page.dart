@@ -9,20 +9,13 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ProductListView(),
-    );
+    return ProductListView();
   }
 }
 
-class ProductListView extends StatefulWidget {
+class ProductListView extends StatelessWidget {
   const ProductListView({Key? key}) : super(key: key);
 
-  @override
-  _ProductListViewState createState() => _ProductListViewState();
-}
-
-class _ProductListViewState extends State<ProductListView> {
   @override
   Widget build(BuildContext context) {
     final catrItemsList =

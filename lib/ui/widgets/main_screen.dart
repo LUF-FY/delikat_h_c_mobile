@@ -1,20 +1,28 @@
-import 'package:delikat_h_c_mobile/domain/services/bottom_bar_selection_service.dart';
+import 'package:delikat_h_c_mobile/domain/services/page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/pages/cart_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/pages/main_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
-import 'package:delikat_h_c_mobile/view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class MainScreen extends StatelessWidget {
-  const MainScreen({Key? key}) : super(key: key);
+class MainScreen extends StatefulWidget {
+  MainScreen({Key? key}) : super(key: key);
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  void dispose() {
+    context.read<PageSelectionService>().disposeController();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final goodsList = context.select((ProductService ps) => ps.productsList);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -28,29 +36,16 @@ class MainScreen extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Navigator(
-                key: Utils.mainListNav,
-                initialRoute: '/main',
-                onGenerateRoute: (RouteSettings settings) {
-                  Widget page;
-                  switch (settings.name) {
-                    case '/main':
-                      //page = Center(child: Text('main'));
-                      page = MainPage();
-                      break;
-                    case '/cart':
-                      page = CartPage();
-                      break;
-                    default:
-                      page = Center(child: Text('main'));
-                      break;
-                  }
-
-                  return PageRouteBuilder(
-                      pageBuilder: (_, __, ___) => page,
-                      transitionDuration: const Duration(seconds: 0));
-                }),
-            // child:
+            child: PageView(
+              controller: context
+                  .select((PageSelectionService pss) => pss.pageController),
+              children: [
+                MainPage(),
+                CartPage(),
+                //Center(child: Text('main')),
+                //Center(child: Text('cart')),
+              ],
+            ),
           ),
           BottomBar(),
         ],
@@ -59,69 +54,47 @@ class MainScreen extends StatelessWidget {
   }
 }
 
-// class ProductList extends StatefulWidget {
-//   const ProductList({Key? key}) : super(key: key);
+// class AppBarActoins extends StatelessWidget {
+//   const AppBarActoins({Key? key}) : super(key: key);
 
-//   @override
-//   _ProductListState createState() => _ProductListState();
-// }
-
-// class _ProductListState extends State<ProductList> {
 //   @override
 //   Widget build(BuildContext context) {
-//     final goodsList = context.select((ProductService ps) => ps.productsList);
-//     return ListView.builder(
-//       itemCount: goodsList.length,
-//       itemBuilder: (context, index) {
-//         return ProductCatalogWidget(
-//           product: goodsList[index],
-//         );
-//       },
+//     return Row(
+//       children: [
+//         //IconButtonSearch(),
+//         Stack(
+//           children: const [
+//             IconButtonCart(),
+//             Positioned(
+//               top: 0,
+//               right: 3,
+//               child: CounterProductsInCart(),
+//             )
+//           ],
+//         ),
+//       ],
 //     );
 //   }
 // }
 
-class AppBarActoins extends StatelessWidget {
-  const AppBarActoins({Key? key}) : super(key: key);
+// class IconButtonCart extends StatelessWidget {
+//   const IconButtonCart({Key? key}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        //IconButtonSearch(),
-        Stack(
-          children: const [
-            IconButtonCart(),
-            Positioned(
-              top: 0,
-              right: 3,
-              child: CounterProductsInCart(),
-            )
-          ],
-        ),
-      ],
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return IconButton(
+// // По нажатию переходить на страницу корзины
 
-class IconButtonCart extends StatelessWidget {
-  const IconButtonCart({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-// По нажатию переходить на страницу корзины
-
-      onPressed: (() {
-        Navigator.pushNamed(context, '/cart');
-      }),
-      icon: const Icon(
-        Icons.shopping_cart,
-        color: Colors.black,
-      ),
-    );
-  }
-}
+//       onPressed: (() {
+//         Navigator.pushNamed(context, '/cart');
+//       }),
+//       icon: const Icon(
+//         Icons.shopping_cart,
+//         color: Colors.black,
+//       ),
+//     );
+//   }
+// }
 
 class CounterProductsInCart extends StatelessWidget {
   const CounterProductsInCart({Key? key}) : super(key: key);
@@ -178,30 +151,29 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(30),
-        child: Consumer<BottomBarSelectionService>(
-            builder: (context, bottomBarSelectionService, child) {
+        child: Selector<PageSelectionService>(builder: (context, pss, child) {
           return Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 IconButton(
                     icon: Icon(Icons.trip_origin,
-                        color: bottomBarSelectionService.tabSelection == 'main'
+                        color: pss.pageIndex == 0
                             ? Utils.mainDark
                             : Utils.mainColor),
                     onPressed: () {
-                      bottomBarSelectionService.setTabSelection('main');
+                      pss.setPageIndex(0);
                     }),
                 IconButton(
                     icon: Icon(Icons.shopping_cart,
-                        color: bottomBarSelectionService.tabSelection == 'cart'
+                        color: pss.pageIndex == 1
                             ? Utils.mainDark
                             : Utils.mainColor),
                     onPressed: () {
-                      bottomBarSelectionService.setTabSelection('cart');
+                      pss.setPageIndex(1);
                     }),
               ]);
-        }));
+        } selector: (, p1) => ,));
   }
 }
 
