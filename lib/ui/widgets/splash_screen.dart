@@ -8,7 +8,8 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (!context.watch<ProductService>().isLoading) {
+    var _isLoaded = context.select((ProductService ps) => ps.isLoaded);
+    if (_isLoaded) {
       Utils.mainAppNav.currentState!.pushReplacementNamed('/main');
     }
 

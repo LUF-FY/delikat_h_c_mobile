@@ -1,15 +1,15 @@
-import 'package:delikat_h_c_mobile/domain/entity/goods.dart';
+import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 
-final List<Cartitem> ProductData = [
-  Cartitem(
+final List<Product> ProductData = [
+  Product(
     id: 1,
     name: 'Эрик будущий депутат',
     price: 0,
     image: '/images/products/wolf.png',
     description: 'Любит тяночек',
   ),
-  Cartitem(
+  Product(
     id: 2,
     name: 'OLINA',
     price: 6,
@@ -19,12 +19,12 @@ final List<Cartitem> ProductData = [
   ),
 ];
 
-final List<Goods> GoodsData = [
-  Goods(
+final List<CartItem> GoodsData = [
+  CartItem(
     product: ProductData[0],
     quantity: 12,
   ),
-  Goods(
+  CartItem(
     product: ProductData[1],
     quantity: 2,
   ),

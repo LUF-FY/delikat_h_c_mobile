@@ -7,20 +7,16 @@ class ProductService extends ChangeNotifier {
 
   List<Product> _productsList = [];
   List<Product> get productsList => _productsList;
-  bool _isLoading = false;
-  bool get isLoading => _isLoading;
+  bool _isLoaded = false;
+  bool get isLoaded => _isLoaded;
 
   ProductService() {
     init();
   }
 
   init() async {
-    _isLoading = true;
-    notifyListeners();
-
     await LoadValue();
-
-    _isLoading = false;
+    _isLoaded = true;
     notifyListeners();
   }
 

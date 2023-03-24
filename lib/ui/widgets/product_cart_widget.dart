@@ -1,6 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
-import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:flutter/material.dart';
 
 class ProductCartWidget extends StatelessWidget {
@@ -46,7 +45,7 @@ class ProductCartWidget extends StatelessWidget {
               ),
               SizedBox(
                 height: 100,
-                child: Column(
+                child: Row(
                   children: [
                     const Divider(height: 6),
                     SizedBox(
@@ -58,14 +57,19 @@ class ProductCartWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 24,
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: ProductPriceWidget(price: cartItem.product.price),
-                      ),
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 24,
+                          child: Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ProductPriceWidget(
+                                price: cartItem.product.price),
+                          ),
+                        ),
+                        ProductCardButtons(quantity: cartItem.quantity),
+                      ],
                     ),
-                    ProductCardButtons(quantity: cartItem.quantity),
                   ],
                 ),
               ),
@@ -164,30 +168,30 @@ class ProductCardButtons extends StatelessWidget {
   }
 }
 
-class ProductCardBuyButton extends StatelessWidget {
-  const ProductCardBuyButton({super.key});
+// class ProductCardBuyButton extends StatelessWidget {
+//   const ProductCardBuyButton({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      style:
-          ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)),
-      // child: const Icon(
-      //   Icons.add_shopping_cart,
-      //   size: 20,
-      //   color: Colors.white,
-      // ),
-      child: const Text(
-        "Buy",
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-        ),
-      ),
-      onPressed: () {},
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return ElevatedButton(
+//       style:
+//           ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)),
+//       // child: const Icon(
+//       //   Icons.add_shopping_cart,
+//       //   size: 20,
+//       //   color: Colors.white,
+//       // ),
+//       child: const Text(
+//         "Buy",
+//         style: TextStyle(
+//           color: Colors.white,
+//           fontSize: 16,
+//         ),
+//       ),
+//       onPressed: () {},
+//     );
+//   }
+// }
 
 class ProductCardQuantityChangeButton extends StatelessWidget {
   ProductCardQuantityChangeButton({super.key, required this.text});

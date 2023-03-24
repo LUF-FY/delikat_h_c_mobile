@@ -1,6 +1,7 @@
 import 'package:delikat_h_c_mobile/domain/services/bottom_bar_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/pages/cart_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/pages/main_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
@@ -38,7 +39,7 @@ class MainScreen extends StatelessWidget {
                       page = MainPage();
                       break;
                     case '/cart':
-                      page = Center(child: Text('cart'));
+                      page = CartPage();
                       break;
                     default:
                       page = Center(child: Text('main'));

@@ -1,5 +1,6 @@
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
+import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_cart_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,13 +26,13 @@ class _ProductListViewState extends State<ProductListView> {
   @override
   Widget build(BuildContext context) {
     final catrItemsList =
-        context.select((ProductService ps) => ps.productsList);
+        context.select((ShoppingCartService scs) => scs.cartProducts);
 
     return ListView.builder(
       itemCount: catrItemsList.length,
       itemBuilder: (context, index) {
-        return ProductCatalogWidget(
-          catrItem: catrItemsList[index],
+        return ProductCartWidget(
+          cartItem: catrItemsList[index],
         );
       },
     );

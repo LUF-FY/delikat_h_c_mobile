@@ -1,5 +1,4 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:flutter/material.dart';
@@ -8,16 +7,16 @@ import 'package:provider/provider.dart';
 class ProductCatalogWidget extends StatelessWidget {
   ProductCatalogWidget({
     Key? key,
-    required this.catrItem,
+    required this.product,
   }) : super(key: key);
 
-  CartItem catrItem;
+  Product product;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(catrItem.toString());
+        print(product.toString());
       },
       child: SizedBox(
         height: 250,
@@ -34,7 +33,7 @@ class ProductCatalogWidget extends StatelessWidget {
               Container(
                 height: 150,
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ProductImageWidget(img: catrItem.product.image),
+                child: ProductImageWidget(img: product.image),
               ),
               SizedBox(
                 height: 100,
@@ -46,7 +45,7 @@ class ProductCatalogWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Center(
-                          child: ProductNameWidget(name: catrItem.product.name),
+                          child: ProductNameWidget(name: product.name),
                         ),
                       ),
                     ),
@@ -57,11 +56,12 @@ class ProductCatalogWidget extends StatelessWidget {
                           height: 24,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: ProductPriceWidget(price: catrItem.product.price),
+                            child: ProductPriceWidget(price: product.price),
                           ),
                         ),
-                        //ProductCardButtons(quantity: goods.quantity),
-                        ProductCardBuyButton(cartItem: ),
+                        ProductCardBuyButton(
+                          product: product,
+                        ),
                       ],
                     )
                   ],
@@ -130,77 +130,10 @@ class ProductPriceWidget extends StatelessWidget {
   }
 }
 
-class ProductCardButtons extends StatelessWidget {
-  ProductCardButtons({
-    Key? key,
-    required this.quantity,
-    required this.cartItem
-  }) : super(key: key);
-
-  int quantity;
-  CartItem cartItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          ProductCardQuantityChangeButton(
-            text: '-',
-            cartItem: cartItem,
-          ),
-          SizedBox(
-            width: 40,
-            child: Center(child: Text('$quantity')),
-          ),
-          ProductCardQuantityChangeButton(
-            text: '+',
-            cartItem: cartItem,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class ProductCardQuantityChangeButton extends StatelessWidget {
-  ProductCardQuantityChangeButton({super.key, required this.text, required this.cartItem});
-  String text;
-  CartItem cartItem;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 40.0,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.green),
-        ),
-        // maximumSize: MaterialStatePropertyAll(Size(18.0, 18.0))),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
-        ),
-        onPressed: () {
-          if(text == '+'){
-            context.read<ShoppingCartService>().incItemQuantity(cartItem: cartItem);
-          }
-          else if (text == '-'){
-            context.read<ShoppingCartService>().decItemQuantity(cartItem: cartItem);
-          }
-        },
-      ),
-    );
-  }
-}
-
 class ProductCardBuyButton extends StatelessWidget {
-  const ProductCardBuyButton({super.key});
+  ProductCardBuyButton({super.key, required this.product});
+
+  Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -214,7 +147,81 @@ class ProductCardBuyButton extends StatelessWidget {
           fontSize: 16,
         ),
       ),
-      onPressed: () {},
+      onPressed: () {
+        context.read<ShoppingCartService>().addToCart(product);
+      },
     );
   }
 }
+
+// class ProductCardButtons extends StatelessWidget {
+//   ProductCardButtons({Key? key, required this.quantity, required this.cartItem})
+//       : super(key: key);
+
+//   int quantity;
+//   CartItem cartItem;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 40,
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//         children: <Widget>[
+//           ProductCardQuantityChangeButton(
+//             text: '-',
+//             cartItem: cartItem,
+//           ),
+//           SizedBox(
+//             width: 40,
+//             child: Center(child: Text('$quantity')),
+//           ),
+//           ProductCardQuantityChangeButton(
+//             text: '+',
+//             cartItem: cartItem,
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+
+// class ProductCardQuantityChangeButton extends StatelessWidget {
+//   ProductCardQuantityChangeButton(
+//       {super.key, required this.text, required this.cartItem});
+//   String text;
+//   CartItem cartItem;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 40.0,
+//       child: ElevatedButton(
+//         style: ButtonStyle(
+//           backgroundColor: MaterialStatePropertyAll(Colors.green),
+//         ),
+//         // maximumSize: MaterialStatePropertyAll(Size(18.0, 18.0))),
+//         child: Text(
+//           text,
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontSize: 16,
+//           ),
+//         ),
+//         onPressed: () {
+//           if (text == '+') {
+//             context
+//                 .read<ShoppingCartService>()
+//                 .incItemQuantity(cartItem: cartItem);
+//           } else if (text == '-') {
+//             context
+//                 .read<ShoppingCartService>()
+//                 .decItemQuantity(cartItem: cartItem);
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }
+
+

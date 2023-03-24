@@ -35,7 +35,7 @@ class _ProductGridViewState extends State<ProductGridView> {
       ),
       itemBuilder: (context, index) {
         return ProductCatalogWidget(
-          catrItem: productList[index],
+          product: productList[index],
         );
       },
       itemCount: productList.length,
