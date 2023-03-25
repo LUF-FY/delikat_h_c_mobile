@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -138,19 +139,28 @@ class ProductCardBuyButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var cartSevice = context.watch<ShoppingCartService>();
+
     return ElevatedButton(
-      style:
-          ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)),
-      child: const Text(
+      style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(
+              cartSevice.isProductInCart(product)
+                  ? Utils.buttonDisableBG
+                  : Utils.mainColor)),
+      onPressed: cartSevice.isProductInCart(product)
+          ? null
+          : () {
+              cartSevice.addToCart(product);
+            },
+      child: Text(
         "Buy",
         style: TextStyle(
-          color: Colors.white,
+          color: cartSevice.isProductInCart(product)
+              ? Utils.buttonDisableT
+              : Utils.buttonEnableT,
           fontSize: 16,
         ),
       ),
-      onPressed: () {
-        context.read<ShoppingCartService>().addToCart(product);
-      },
     );
   }
 }

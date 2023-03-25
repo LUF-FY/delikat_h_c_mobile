@@ -15,6 +15,9 @@ class ProductCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // CartItem cartItem =
+    //     context.select((ShoppingCartService scs) => scs.cartProducts);
+
     return Padding(
       // color: Colors.red,
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
@@ -40,7 +43,7 @@ class ProductCartWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(20),
             ),
             child: Row(
-              // mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Container(
                   height: 80,
@@ -53,38 +56,36 @@ class ProductCartWidget extends StatelessWidget {
                 const SizedBox(
                   width: 10,
                 ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 24,
-                          child: ProductNameWidget(name: cartItem.product.name),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5),
-                          child:
-                              ProductPriceWidget(price: cartItem.product.price),
-                        ),
-                        ProductCardButtons(cartItem: cartItem),
-                      ],
+                Expanded(
+                  child: Container(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 24,
+                            child:
+                                ProductNameWidget(name: cartItem.product.name),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(5),
+                            child: ProductPriceWidget(
+                                price: cartItem.product.price),
+                          ),
+                          ProductCardButtons(cartItem: cartItem),
+                        ],
+                      ),
                     ),
                   ),
                 ),
                 const SizedBox(
                   width: 10,
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.delete_forever,
-                      color: Utils.mainColor,
-                    ))
+                ProductCardButtonDelete(cartItem: cartItem),
               ],
             ),
           ),
@@ -149,37 +150,26 @@ class ProductPriceWidget extends StatelessWidget {
   }
 }
 
-// class ProductCardButtons extends StatelessWidget {
-//   ProductCardButtons({
-//     Key? key,
-//     required this.quantity,
-//   }) : super(key: key);
+class ProductCardButtonDelete extends StatelessWidget {
+  ProductCardButtonDelete({
+    Key? key,
+    required this.cartItem,
+  }) : super(key: key);
 
-//   int quantity;
+  CartItem cartItem;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 40,
-//       //color: Colors.red,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.start,
-//         children: <Widget>[
-//           ProductCardQuantityChangeButton(
-//             text: '-',
-//           ),
-//           SizedBox(
-//             width: 40,
-//             child: Center(child: Text('$quantity')),
-//           ),
-//           ProductCardQuantityChangeButton(
-//             text: '+',
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return IconButton(
+        onPressed: () => context
+            .read<ShoppingCartService>()
+            .removeFromCart(cartItem: cartItem),
+        icon: Icon(
+          Icons.delete_forever,
+          color: Utils.mainColor,
+        ));
+  }
+}
 
 // class ProductCardBuyButton extends StatelessWidget {
 //   const ProductCardBuyButton({super.key});
@@ -239,25 +229,22 @@ class ProductCardButtons extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          ProductCardQuantityChangeButton(
-            text: '-',
-            cartItem: cartItem,
-          ),
-          SizedBox(
-            width: 40,
-            child: Center(child: Text('${cartItem.quantity}')),
-          ),
-          ProductCardQuantityChangeButton(
-            text: '+',
-            cartItem: cartItem,
-          ),
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        ProductCardQuantityChangeButton(
+          text: '-',
+          cartItem: cartItem,
+        ),
+        SizedBox(
+          width: 40,
+          child: Center(child: Text('${cartItem.quantity}')),
+        ),
+        ProductCardQuantityChangeButton(
+          text: '+',
+          cartItem: cartItem,
+        ),
+      ],
     );
   }
 }

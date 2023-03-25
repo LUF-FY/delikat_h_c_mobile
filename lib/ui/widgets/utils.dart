@@ -5,5 +5,8 @@ class Utils {
   static GlobalKey<NavigatorState> mainAppNav = GlobalKey();
 
   static const Color mainColor = Colors.green;
-  static const Color mainDark = Color.fromARGB(255, 42, 97, 43);
+  static const Color mainDark = Color(0xFF2A612B);
+  static const Color buttonDisableBG = Color(0xFFEEEEEE);
+  static const Color buttonDisableT = Colors.grey;
+  static const Color buttonEnableT = Colors.white;
 }

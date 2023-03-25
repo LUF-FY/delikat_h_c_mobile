@@ -29,10 +29,29 @@ class ShoppingCartService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFromCart(CartItem cartItem) {
+  void removeFromCart({required CartItem cartItem}) {
     cartProducts.removeWhere((ci) => ci.product.id == cartItem.product.id);
     notifyListeners();
   }
+
+  // void incItemQuantity({required int index}) {
+  //   var temp_ci = cartProducts[index];
+  //   temp_ci.quantity++;
+  //   print('${temp_ci.quantity} inc');
+  //   notifyListeners();
+  // }
+
+  // void decItemQuantity({required int index}) {
+  //   var temp_ci = cartProducts[index];
+  //   temp_ci.quantity = max(temp_ci.quantity - 1, 1);
+  //   print('${temp_ci.quantity} dec');
+  //   notifyListeners();
+  // }
+
+  // void removeFromCart({required int index}) {
+  //   cartProducts.removeAt(index);
+  //   notifyListeners();
+  // }
 
   void clearCart() {
     cartProducts.clear();
@@ -48,7 +67,11 @@ class ShoppingCartService extends ChangeNotifier {
     return cartTotal;
   }
 
-  bool isProductInCart(CartItem cartitem) {
+  bool isCartItemInCart(CartItem cartitem) {
     return cartProducts.any((ci) => ci.product.id == cartitem.product.id);
+  }
+
+  bool isProductInCart(Product product) {
+    return cartProducts.any((ci) => ci.product.id == product.id);
   }
 }
