@@ -82,10 +82,11 @@ class ProductImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipRRect(
       //child: Hero(
       //tag: img,
       //child: Image.asset('assets/$img.png'),
+      borderRadius: BorderRadius.circular(5),
       child: Image(
         image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
       ),

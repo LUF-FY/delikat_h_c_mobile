@@ -1,6 +1,9 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
+import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProductCartWidget extends StatelessWidget {
   ProductCartWidget({
@@ -12,68 +15,78 @@ class ProductCartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-      height: 100,
-      child: GestureDetector(
-        // onTap: () {
-        //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //     return ProductDetail(
-        //       product: _product,
-        //     );
-        //   }));
-        // },
-        onTap: () {
-          print(cartItem.toString());
-        },
+    return Padding(
+      // color: Colors.red,
+      padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+      child: Container(
+        //color: Colors.red,
+        child: GestureDetector(
+          // onTap: () {
+          //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+          //     return ProductDetail(
+          //       product: _product,
+          //     );
+          //   }));
+          // },
+          onTap: () {
+            print(cartItem.toString());
+          },
 
-        child: Card(
-          elevation: 2,
-          shadowColor: Colors.green,
-          color: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Container(
-                height: 84,
-                width: 84,
-                padding: const EdgeInsets.all(8.0),
-                child: ProductImageWidget(img: cartItem.product.image),
-              ),
-              SizedBox(
-                height: 100,
-                child: Row(
-                  children: [
-                    const Divider(height: 6),
-                    SizedBox(
-                      height: 24,
-                      child: Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Center(
-                          child: ProductNameWidget(name: cartItem.product.name),
-                        ),
-                      ),
-                    ),
-                    Column(
+          child: Card(
+            elevation: 2,
+            shadowColor: Colors.green,
+            color: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  padding: const EdgeInsets.all(8.0),
+                  child: ProductImageWidget(
+                    img: cartItem.product.image,
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8),
+                  child: Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
                           height: 24,
-                          child: Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: ProductPriceWidget(
-                                price: cartItem.product.price),
-                          ),
+                          child: ProductNameWidget(name: cartItem.product.name),
                         ),
-                        ProductCardButtons(quantity: cartItem.quantity),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(5),
+                          child:
+                              ProductPriceWidget(price: cartItem.product.price),
+                        ),
+                        ProductCardButtons(cartItem: cartItem),
                       ],
                     ),
-                  ],
+                  ),
                 ),
-              ),
-            ],
+                const SizedBox(
+                  width: 10,
+                ),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.delete_forever,
+                      color: Utils.mainColor,
+                    ))
+              ],
+            ),
           ),
         ),
       ),
@@ -88,10 +101,11 @@ class ProductImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return ClipRRect(
       //child: Hero(
       //tag: img,
       //child: Image.asset('assets/$img.png'),
+      borderRadius: BorderRadius.circular(5),
       child: Image(
         image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
       ),
@@ -107,12 +121,11 @@ class ProductNameWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoSizeText(
+    return Text(
       name,
-      maxLines: 1,
       style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
+        fontSize: 15,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
@@ -130,43 +143,43 @@ class ProductPriceWidget extends StatelessWidget {
       style: const TextStyle(
         color: Colors.green,
         fontSize: 18,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.bold,
       ),
     );
   }
 }
 
-class ProductCardButtons extends StatelessWidget {
-  ProductCardButtons({
-    Key? key,
-    required this.quantity,
-  }) : super(key: key);
+// class ProductCardButtons extends StatelessWidget {
+//   ProductCardButtons({
+//     Key? key,
+//     required this.quantity,
+//   }) : super(key: key);
 
-  int quantity;
+//   int quantity;
 
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 40,
-      //color: Colors.red,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          ProductCardQuantityChangeButton(
-            text: '-',
-          ),
-          SizedBox(
-            width: 40,
-            child: Center(child: Text('$quantity')),
-          ),
-          ProductCardQuantityChangeButton(
-            text: '+',
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return SizedBox(
+//       height: 40,
+//       //color: Colors.red,
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         children: <Widget>[
+//           ProductCardQuantityChangeButton(
+//             text: '-',
+//           ),
+//           SizedBox(
+//             width: 40,
+//             child: Center(child: Text('$quantity')),
+//           ),
+//           ProductCardQuantityChangeButton(
+//             text: '+',
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 // class ProductCardBuyButton extends StatelessWidget {
 //   const ProductCardBuyButton({super.key});
@@ -193,9 +206,67 @@ class ProductCardButtons extends StatelessWidget {
 //   }
 // }
 
+// class ProductCardQuantityChangeButton extends StatelessWidget {
+//   ProductCardQuantityChangeButton({super.key, required this.text});
+//   String text;
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       width: 40.0,
+//       child: ElevatedButton(
+//         style: ButtonStyle(
+//           backgroundColor: MaterialStatePropertyAll(Colors.green),
+//         ),
+//         // maximumSize: MaterialStatePropertyAll(Size(18.0, 18.0))),
+//         child: Text(
+//           text,
+//           style: TextStyle(
+//             color: Colors.white,
+//             fontSize: 16,
+//           ),
+//         ),
+//         onPressed: () {},
+//       ),
+//     );
+//   }
+// }
+
+class ProductCardButtons extends StatelessWidget {
+  ProductCardButtons({Key? key, required this.cartItem}) : super(key: key);
+
+  CartItem cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 40,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          ProductCardQuantityChangeButton(
+            text: '-',
+            cartItem: cartItem,
+          ),
+          SizedBox(
+            width: 40,
+            child: Center(child: Text('${cartItem.quantity}')),
+          ),
+          ProductCardQuantityChangeButton(
+            text: '+',
+            cartItem: cartItem,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class ProductCardQuantityChangeButton extends StatelessWidget {
-  ProductCardQuantityChangeButton({super.key, required this.text});
+  ProductCardQuantityChangeButton(
+      {super.key, required this.text, required this.cartItem});
   String text;
+  CartItem cartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -213,7 +284,17 @@ class ProductCardQuantityChangeButton extends StatelessWidget {
             fontSize: 16,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          if (text == '+') {
+            context
+                .read<ShoppingCartService>()
+                .incItemQuantity(cartItem: cartItem);
+          } else if (text == '-') {
+            context
+                .read<ShoppingCartService>()
+                .decItemQuantity(cartItem: cartItem);
+          }
+        },
       ),
     );
   }

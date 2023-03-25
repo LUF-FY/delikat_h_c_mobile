@@ -15,7 +15,7 @@ class PageSelectionService extends ChangeNotifier {
     pageController.animateToPage(
       pageIndex,
       duration: Duration(milliseconds: 250),
-      curve: Curves.easeInOutExpo,
+      curve: Curves.linear,
     );
     notifyListeners();
   }

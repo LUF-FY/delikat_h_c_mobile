@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:flutter/material.dart';
@@ -15,13 +17,15 @@ class ShoppingCartService extends ChangeNotifier {
     cartProducts
         .firstWhere((ci) => ci.product.id == cartItem.product.id)
         .quantity++;
+    print('${cartItem.quantity} inc');
     notifyListeners();
   }
 
   void decItemQuantity({required CartItem cartItem}) {
-    cartProducts
-        .firstWhere((ci) => ci.product.id == cartItem.product.id)
-        .quantity--;
+    var temp_ci =
+        cartProducts.firstWhere((ci) => ci.product.id == cartItem.product.id);
+    temp_ci.quantity = max(temp_ci.quantity - 1, 1);
+    print('${cartItem.quantity} dec');
     notifyListeners();
   }
 

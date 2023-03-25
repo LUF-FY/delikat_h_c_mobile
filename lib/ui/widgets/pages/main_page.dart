@@ -18,6 +18,7 @@ class ProductGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final productList = context.select((ProductService ps) => ps.productsList);
+
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         mainAxisSpacing: 10,

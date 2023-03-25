@@ -36,15 +36,19 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         children: [
           Expanded(
-            child: PageView(
-              controller: context
-                  .select((PageSelectionService pss) => pss.pageController),
-              children: [
-                MainPage(),
-                CartPage(),
-                //Center(child: Text('main')),
-                //Center(child: Text('cart')),
-              ],
+            child: Consumer<PageSelectionService>(
+              builder: (context, pss, child) {
+                return PageView(
+                  onPageChanged: (index) => pss.setPageIndex(index),
+                  controller: pss.pageController,
+                  children: [
+                    MainPage(),
+                    CartPage(),
+                    //Center(child: Text('main')),
+                    //Center(child: Text('cart')),
+                  ],
+                );
+              },
             ),
           ),
           BottomBar(),
@@ -151,7 +155,7 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(30),
-        child: Selector<PageSelectionService>(builder: (context, pss, child) {
+        child: Consumer<PageSelectionService>(builder: (context, pss, child) {
           return Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -173,7 +177,7 @@ class BottomBar extends StatelessWidget {
                       pss.setPageIndex(1);
                     }),
               ]);
-        } selector: (, p1) => ,));
+        }));
   }
 }
 

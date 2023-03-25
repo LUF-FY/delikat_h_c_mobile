@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:delikat_h_c_mobile/data.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,6 +25,11 @@ class ProductDataProvider {
     } catch (e) {
       print(e);
     }
+
+    if (products.length == 0) {
+      products = productData;
+    }
+
     return products;
   }
 }
