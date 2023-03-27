@@ -1,6 +1,7 @@
 import 'package:delikat_h_c_mobile/data.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_cart_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -56,43 +57,15 @@ class ProductListView extends StatelessWidget {
                                   fontSize: 30)),
                         ],
                       ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Material(
-                    color: cartSevice.cartProducts.isEmpty
-                        ? Utils.buttonDisableBG
-                        : Utils.mainColor.withOpacity(0.2),
-                    child: InkWell(
-                      splashColor: Utils.mainDark.withOpacity(0.2),
-                      highlightColor: Utils.mainDark.withOpacity(0.5),
-                      onTap: cartSevice.cartProducts.isEmpty
-                          ? null
-                          : () {
-                              cartSevice.clearCart();
-                            },
-                      child: Container(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.delete_forever,
-                              color: cartSevice.cartProducts.isEmpty
-                                  ? Utils.buttonDisableT
-                                  : Utils.mainDark,
-                            ),
-                            Text(
-                              'Clear Cart',
-                              style: TextStyle(
-                                  color: cartSevice.cartProducts.isEmpty
-                                      ? Utils.buttonDisableT
-                                      : Utils.mainDark),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                IconTextButton(
+                  enable: cartSevice.cartProducts.isEmpty,
+                  text: "checkout",
+                  //
+                  //Сделать переход на экран Order
+                  //
+                  onTap: () => cartSevice.clearCart(),
+                  //
+                  iconData: Icons.shopping_cart_checkout,
                 )
               ],
             ),

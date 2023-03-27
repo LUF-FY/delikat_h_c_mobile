@@ -3,6 +3,7 @@ import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/pages/cart_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/pages/main_page.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/pages/order_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   void dispose() {
-    context.read<PageSelectionService>().disposeController();
+    context.read<MainPageSelectionService>().disposeController();
     super.dispose();
   }
 
@@ -36,14 +37,14 @@ class _MainScreenState extends State<MainScreen> {
       body: Column(
         children: [
           Expanded(
-            child: Consumer<PageSelectionService>(
+            child: Consumer<MainPageSelectionService>(
               builder: (context, pss, child) {
                 return PageView(
                   onPageChanged: (index) => pss.setPageIndex(index),
                   controller: pss.pageController,
                   children: [
                     MainPage(),
-                    CartPage(),
+                    OrderPage(),
                     //Center(child: Text('main')),
                     //Center(child: Text('cart')),
                   ],
@@ -155,7 +156,8 @@ class BottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         padding: EdgeInsets.all(30),
-        child: Consumer<PageSelectionService>(builder: (context, pss, child) {
+        child:
+            Consumer<MainPageSelectionService>(builder: (context, pss, child) {
           return Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

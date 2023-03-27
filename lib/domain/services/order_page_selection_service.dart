@@ -1,7 +1,7 @@
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 
-class MainPageSelectionService extends ChangeNotifier {
+class OrderPageSelectionService extends ChangeNotifier {
   int pageIndex = 0;
 
   final pageController = PageController();
