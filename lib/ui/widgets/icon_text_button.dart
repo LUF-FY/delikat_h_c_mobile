@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class IconTextButton extends StatelessWidget {
   IconTextButton(
       {Key? key,
-      required this.enable,
+      required this.disable,
       required this.text,
       required this.onTap,
       this.iconData})
       : super(key: key);
 
-  bool enable;
+  bool disable;
   String text;
   IconData? iconData;
   Function onTap;
@@ -21,11 +21,11 @@ class IconTextButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(30),
       child: Material(
         color:
-            enable ? Utils.buttonDisableBG : Utils.mainColor.withOpacity(0.2),
+            disable ? Utils.buttonDisableBG : Utils.mainColor.withOpacity(0.2),
         child: InkWell(
           splashColor: Utils.mainDark.withOpacity(0.2),
           highlightColor: Utils.mainDark.withOpacity(0.5),
-          onTap: enable
+          onTap: disable
               ? null
               : () {
                   onTap();
@@ -36,14 +36,18 @@ class IconTextButton extends StatelessWidget {
               children: [
                 iconData == null
                     ? SizedBox()
-                    : Icon(
-                        iconData,
-                        color: enable ? Utils.buttonDisableT : Utils.mainDark,
+                    : Padding(
+                        padding: const EdgeInsets.only(right: 4.0),
+                        child: Icon(
+                          iconData,
+                          color:
+                              disable ? Utils.buttonDisableT : Utils.mainDark,
+                        ),
                       ),
                 Text(
-                  'Clear Cart',
+                  text,
                   style: TextStyle(
-                      color: enable ? Utils.buttonDisableT : Utils.mainDark),
+                      color: disable ? Utils.buttonDisableT : Utils.mainDark),
                 )
               ],
             ),

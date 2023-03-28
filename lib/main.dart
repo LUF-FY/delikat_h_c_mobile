@@ -2,7 +2,9 @@ import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.
 import 'package:delikat_h_c_mobile/domain/services/page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/main_screen.dart';
+
+import 'package:delikat_h_c_mobile/ui/widgets/screens/main_screen.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/screens/order_screen.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/splash_screen.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -42,6 +44,7 @@ class MainApp extends StatelessWidget {
         routes: {
           '/splash': (context) => SplashScreen(),
           '/': (context) => MainScreen(),
+          '/order': (context) => OrderScreen(),
         },
       ),
     );

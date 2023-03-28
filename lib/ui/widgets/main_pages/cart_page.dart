@@ -58,12 +58,12 @@ class ProductListView extends StatelessWidget {
                         ],
                       ),
                 IconTextButton(
-                  enable: cartSevice.cartProducts.isEmpty,
+                  disable: cartSevice.cartProducts.isEmpty,
                   text: "checkout",
                   //
                   //Сделать переход на экран Order
                   //
-                  onTap: () => cartSevice.clearCart(),
+                  onTap: () => Navigator.of(context).pushNamed('/order'),
                   //
                   iconData: Icons.shopping_cart_checkout,
                 )

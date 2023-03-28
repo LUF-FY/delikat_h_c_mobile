@@ -1,9 +1,8 @@
 import 'package:delikat_h_c_mobile/domain/services/page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/pages/cart_page.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/pages/main_page.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/pages/order_page.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/main_pages/cart_page.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/main_pages/main_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -27,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: Utils.mainColor,
         centerTitle: true,
         title: const Text(
           'Delikat',
@@ -44,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
                   controller: pss.pageController,
                   children: [
                     MainPage(),
-                    OrderPage(),
+                    CartPage(),
                     //Center(child: Text('main')),
                     //Center(child: Text('cart')),
                   ],
