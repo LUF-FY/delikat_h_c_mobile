@@ -1,17 +1,29 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:delikat_h_c_mobile/domain/entity/order_product.dart';
 
 class Order {
-  final String firstName;
-  final String lastName;
-  final String phoneNumber;
-  final String street;
-  final int house;
-  final int housing;
-  final int entrance;
-  final int apartament;
-  final List<OrderProduct> orderProducts;
+  String? email;
+  String? firstName;
+  String? lastName;
+  String? phoneNumber;
+  String? street;
+  int? house;
+  int? housing;
+  int? entrance;
+  int? apartament;
+  List<OrderProduct>? orderProducts;
 
-  Order({
+  Order();
+
+  Order.personalInfo({
+    required this.email,
+    required this.firstName,
+    required this.lastName,
+    required this.phoneNumber,
+  });
+
+  Order.allInfo({
+    required this.email,
     required this.firstName,
     required this.lastName,
     required this.phoneNumber,
@@ -23,7 +35,25 @@ class Order {
     required this.orderProducts,
   });
 
-  static Order fromJson(Map<String, dynamic> json) => Order(
+  void setPersonalInfo(
+      String email, String firstName, String lastName, String phoneNumber) {
+    this.email = email;
+    this.firstName = firstName;
+    this.lastName = lastName;
+    this.phoneNumber = phoneNumber;
+  }
+
+  void setAddressInfo(
+      String street, int house, int housing, int entrance, int apartament) {
+    this.street = street;
+    this.house = house;
+    this.housing = housing;
+    this.entrance = entrance;
+    this.apartament = apartament;
+  }
+
+  static Order fromJson(Map<String, dynamic> json) => Order.allInfo(
+        email: json['email'] as String,
         firstName: json['first_name'] as String,
         lastName: json['last_name'] as String,
         phoneNumber: json['phone_number'] as String,

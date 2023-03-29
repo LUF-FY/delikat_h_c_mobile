@@ -1,4 +1,5 @@
 import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.dart';
+import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
@@ -25,6 +26,7 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => ProductService()),
         ChangeNotifierProvider(create: (_) => ShoppingCartService()),
         ChangeNotifierProvider(create: (_) => OrderPageSelectionService()),
+        ChangeNotifierProvider(create: (_) => OrderService()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
