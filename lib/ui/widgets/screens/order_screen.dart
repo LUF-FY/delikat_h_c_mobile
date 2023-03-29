@@ -21,8 +21,8 @@ class _OrderScreenState extends State<OrderScreen> {
         backgroundColor: Utils.mainColor,
         centerTitle: true,
         title: const Text(
-          'Ordering',
-          style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+          'Оформление заказа',
+          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -79,11 +79,11 @@ class PersonalInfoPage extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text("Enter personal information",
+                child: Text("Введите персональную информацию",
                     style: TextStyle(color: Colors.grey, fontSize: 18)),
               ),
               OrderTextField(
-                placeholder: "Email",
+                placeholder: "Электронная почта",
                 controller: _controlleerEmail,
               ),
               OrderTextField(
@@ -101,12 +101,14 @@ class PersonalInfoPage extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const SizedBox(),
+                    const SizedBox(
+                      width: 100,
+                    ),
                     IconTextButton(
                         disable: false,
-                        text: "Next",
+                        text: "Далее",
                         onTap: () {
                           var email = _controlleerEmail.text;
                           var firstName = _controlleerFirstName.text;
@@ -116,7 +118,7 @@ class PersonalInfoPage extends StatelessWidget {
                           if (email.isEmpty) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Email'),
+                              content: Text('Заполните поле Электронная почта'),
                             ));
                           } else if (firstName.isEmpty) {
                             ScaffoldMessenger.of(context)
@@ -174,43 +176,43 @@ class AddressInfoPage extends StatelessWidget {
             children: [
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Text("Enter shipping address",
+                child: Text("Введите адрес доставки",
                     style: TextStyle(color: Colors.grey, fontSize: 18)),
               ),
               OrderTextField(
-                placeholder: "street",
+                placeholder: "Улица",
                 controller: _controlleerStreet,
               ),
               OrderTextField(
-                placeholder: "house",
+                placeholder: "Номер дома",
                 controller: _controlleerHouse,
               ),
               OrderTextField(
-                placeholder: "housing",
+                placeholder: "Корпус",
                 controller: _controlleerHousing,
               ),
               OrderTextField(
-                placeholder: "entrance",
+                placeholder: "Номер подезда",
                 controller: _controlleerEntrance,
               ),
               OrderTextField(
-                placeholder: "apartament",
+                placeholder: "Номер квартиры",
                 controller: _controlleerApartament,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     IconTextButton(
                         disable: false,
-                        text: "Back",
+                        text: "Назад",
                         onTap: () => context
                             .read<OrderPageSelectionService>()
                             .setPageIndex(0)),
                     IconTextButton(
                         disable: false,
-                        text: "Next",
+                        text: "Подтвердить",
                         onTap: () {
                           var street = _controlleerStreet.text;
                           var house = _controlleerHouse.text;
@@ -236,7 +238,7 @@ class AddressInfoPage extends StatelessWidget {
                           } else if (entrance.isEmpty) {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Номер Подезда'),
+                              content: Text('Заполните поле Номер подезда'),
                             ));
                           } else if (apartament.isEmpty) {
                             ScaffoldMessenger.of(context)
@@ -244,17 +246,24 @@ class AddressInfoPage extends StatelessWidget {
                               content: Text('Заполните поле Номер квартиры'),
                             ));
                           } else {
-                            context.read<OrderService>().setAddressInfo(
-                                  street,
-                                  house,
-                                  housing,
-                                  entrance,
-                                  apartament,
-                                );
+                            var massage = context
+                                .read<OrderService>()
+                                .setAddressInfo(street, house, housing,
+                                    entrance, apartament);
+                            if (massage != null) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(
+                                content:
+                                    Text('Неправильно заполнено поле $massage'),
+                              ));
+                            } else {
+                              context.read<OrderService>().sendOrder();
+                              context
+                                  .read<OrderPageSelectionService>()
+                                  .setPageIndex(1);
+                              print("OK");
+                            }
                           }
-                          context
-                              .read<OrderPageSelectionService>()
-                              .setPageIndex(1);
                         }),
                   ],
                 ),

@@ -67,20 +67,34 @@ class Order {
             .toList(),
       );
 
-  Map<String, dynamic> toJson(Order instance) => <String, dynamic>{
+  static Map<String, dynamic> toJson(Order instance) => <String, dynamic>{
+        'email': instance.email,
         'first_name': instance.firstName,
         'last_name': instance.lastName,
         'phone_number': instance.phoneNumber,
         'street': instance.street,
-        'house': instance.house,
-        'housing': instance.housing,
-        'entrance': instance.entrance,
-        'apartament': instance.apartament,
+        'house': "${instance.house}",
+        'housing': "${instance.housing}",
+        'entrance': "${instance.entrance}",
+        'apartament': "${instance.apartament}",
         'order_products': instance.orderProducts,
       };
 
+  // static Map<String, dynamic> toJson(Order instance) => <String, dynamic>{
+  //       'email': 'raz@mail.ru',
+  //       'first_name': "Erik",
+  //       'last_name': "MAga",
+  //       'phone_number': "89997777777",
+  //       'street': '2',
+  //       'house': '3',
+  //       'housing': '4',
+  //       'entrance': '6',
+  //       'apartament': '5',
+  //       'order_products': '[{"product_id":"1","quantity":"123"}]',
+  //     };
+
   @override
   String toString() {
-    return 'OrderProduct(firstName: $firstName,\n lastName: $lastName,\n phoneNumber: $phoneNumber)';
+    return 'Order(email: $email, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, street: $street, house: $house, housing: $housing, entrance: $entrance, apartament: $apartament, orderProducts: $orderProducts)';
   }
 }

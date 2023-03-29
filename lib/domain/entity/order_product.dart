@@ -9,7 +9,8 @@ class OrderProduct {
         quantity: json['quantity'] as int,
       );
 
-  Map<String, dynamic> toJson(OrderProduct instance) => <String, dynamic>{
+  static Map<String, dynamic> toJson(OrderProduct instance) =>
+      <String, dynamic>{
         'id': instance.id,
         'quantity': instance.quantity,
       };
