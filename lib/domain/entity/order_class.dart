@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/order_product.dart';
 
 class Order {
@@ -10,7 +11,7 @@ class Order {
   int? house;
   int? housing;
   int? entrance;
-  int? apartament;
+  int? apartment;
   List<OrderProduct>? orderProducts;
 
   Order();
@@ -31,7 +32,7 @@ class Order {
     required this.house,
     required this.housing,
     required this.entrance,
-    required this.apartament,
+    required this.apartment,
     required this.orderProducts,
   });
 
@@ -49,7 +50,7 @@ class Order {
     this.house = house;
     this.housing = housing;
     this.entrance = entrance;
-    this.apartament = apartament;
+    this.apartment = apartament;
   }
 
   static Order fromJson(Map<String, dynamic> json) => Order.allInfo(
@@ -61,24 +62,33 @@ class Order {
         house: json['house'] as int,
         housing: json['housing'] as int,
         entrance: json['entrance'] as int,
-        apartament: json['apartament'] as int,
+        apartment: json['apartment'] as int,
         orderProducts: (json['order_products'] as List<dynamic>)
             .map((e) => OrderProduct.fromJson(e as Map<String, dynamic>))
             .toList(),
       );
 
-  static Map<String, dynamic> toJson(Order instance) => <String, dynamic>{
-        'email': instance.email,
-        'first_name': instance.firstName,
-        'last_name': instance.lastName,
-        'phone_number': instance.phoneNumber,
-        'street': instance.street,
-        'house': "${instance.house}",
-        'housing': "${instance.housing}",
-        'entrance': "${instance.entrance}",
-        'apartament': "${instance.apartament}",
-        'order_products': instance.orderProducts,
-      };
+  static Map<String, dynamic> toJson(Order instance) {
+    List<Map<String, dynamic>> orderProducts = [];
+    if (instance.orderProducts != null) {
+      for (OrderProduct op in instance.orderProducts!) {
+        orderProducts.add(OrderProduct.toJson(op));
+      }
+    }
+
+    return <String, dynamic>{
+      'email': instance.email,
+      'first_name': instance.firstName,
+      'last_name': instance.lastName,
+      'phone_number': instance.phoneNumber,
+      'street': instance.street,
+      'house': instance.house,
+      'housing': instance.housing,
+      'entrance': instance.entrance,
+      'apartment': instance.apartment,
+      'order_products': orderProducts,
+    };
+  }
 
   // static Map<String, dynamic> toJson(Order instance) => <String, dynamic>{
   //       'email': 'raz@mail.ru',
@@ -95,6 +105,6 @@ class Order {
 
   @override
   String toString() {
-    return 'Order(email: $email, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, street: $street, house: $house, housing: $housing, entrance: $entrance, apartament: $apartament, orderProducts: $orderProducts)';
+    return 'Order(email: $email, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, street: $street, house: $house, housing: $housing, entrance: $entrance, apartment: $apartment, orderProducts: $orderProducts)';
   }
 }

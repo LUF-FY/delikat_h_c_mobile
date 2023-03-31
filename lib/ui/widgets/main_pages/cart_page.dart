@@ -1,4 +1,5 @@
 import 'package:delikat_h_c_mobile/data.dart';
+import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
@@ -63,7 +64,12 @@ class ProductListView extends StatelessWidget {
                   //
                   //Сделать переход на экран Order
                   //
-                  onTap: () => Navigator.of(context).pushNamed('/order'),
+                  onTap: () {
+                    context
+                        .read<OrderService>()
+                        .setOrderProducts(cartSevice.cartProducts);
+                    Navigator.of(context).pushNamed('/order');
+                  },
                   //
                   iconData: Icons.shopping_cart_checkout,
                 )

@@ -1,5 +1,7 @@
 import 'package:delikat_h_c_mobile/domain/data_providers/order_data_provider.dart';
+import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/order_class.dart';
+import 'package:delikat_h_c_mobile/domain/entity/order_product.dart';
 import 'package:flutter/material.dart';
 
 class OrderService extends ChangeNotifier {
@@ -32,6 +34,13 @@ class OrderService extends ChangeNotifier {
           street, houseTemp, housingTemp, entranceTemp, apartamentTemp);
     }
     return null;
+  }
+
+  void setOrderProducts(List<CartItem> cartitems) {
+    List<OrderProduct> orderProducts = [];
+    for (var ci in cartitems) {
+      orderProducts.add(OrderProduct.fromCartitem(ci));
+    }
   }
 
   Future<void> sendOrder() async {
