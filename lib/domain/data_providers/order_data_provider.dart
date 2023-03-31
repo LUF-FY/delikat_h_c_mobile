@@ -11,8 +11,7 @@ class OrderDataProvider {
         'Content-Type': 'application/json; charset=UTF-8',
       };
       var json = jsonEncode(Order.toJson(order));
-      print(order);
-      print(url);
+
       var response = await http.post(
         url,
         headers: headers,
@@ -23,7 +22,6 @@ class OrderDataProvider {
       print("${response.headers}");
       print("${response.request}");
     } catch (e) {
-      print("-----");
       print(e);
     }
   }

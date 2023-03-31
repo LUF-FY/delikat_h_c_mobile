@@ -3,20 +3,10 @@ import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   SplashScreen({Key? key}) : super(key: key);
 
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  var _isSplashScreenBuilt = false;
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  // var _isSplashScreenBuilt = false;
 
   @override
   Widget build(BuildContext context) {

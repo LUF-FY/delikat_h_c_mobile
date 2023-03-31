@@ -41,6 +41,8 @@ class OrderService extends ChangeNotifier {
     for (var ci in cartitems) {
       orderProducts.add(OrderProduct.fromCartitem(ci));
     }
+
+    order.orderProducts = orderProducts;
   }
 
   Future<void> sendOrder() async {

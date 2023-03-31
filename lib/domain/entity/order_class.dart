@@ -45,12 +45,12 @@ class Order {
   }
 
   void setAddressInfo(
-      String street, int house, int housing, int entrance, int apartament) {
+      String street, int house, int housing, int entrance, int apartment) {
     this.street = street;
     this.house = house;
     this.housing = housing;
     this.entrance = entrance;
-    this.apartment = apartament;
+    this.apartment = apartment;
   }
 
   static Order fromJson(Map<String, dynamic> json) => Order.allInfo(

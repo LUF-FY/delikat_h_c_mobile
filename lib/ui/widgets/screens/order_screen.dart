@@ -110,6 +110,11 @@ class PersonalInfoPage extends StatelessWidget {
                         disable: false,
                         text: "Далее",
                         onTap: () {
+                          // _controlleerEmail.text = "jojo@list.ru";
+                          // _controlleerFirstName.text = "Jorno";
+                          // _controlleerLastName.text = "Jovana";
+                          // _controlleerPhoneNumber.text = "89991345678";
+
                           var email = _controlleerEmail.text;
                           var firstName = _controlleerFirstName.text;
                           var lastName = _controlleerLastName.text;
@@ -164,7 +169,7 @@ class AddressInfoPage extends StatelessWidget {
     var _controlleerHouse = TextEditingController();
     var _controlleerHousing = TextEditingController();
     var _controlleerEntrance = TextEditingController();
-    var _controlleerApartament = TextEditingController();
+    var _controlleerApartment = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -197,7 +202,7 @@ class AddressInfoPage extends StatelessWidget {
               ),
               OrderTextField(
                 placeholder: "Номер квартиры",
-                controller: _controlleerApartament,
+                controller: _controlleerApartment,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -214,11 +219,17 @@ class AddressInfoPage extends StatelessWidget {
                         disable: false,
                         text: "Подтвердить",
                         onTap: () {
+                          // _controlleerStreet.text = "Мира";
+                          // _controlleerHouse.text = "1";
+                          // _controlleerHousing.text = "2";
+                          // _controlleerEntrance.text = "3";
+                          // _controlleerApartment.text = "4";
+
                           var street = _controlleerStreet.text;
                           var house = _controlleerHouse.text;
                           var housing = _controlleerHousing.text;
                           var entrance = _controlleerEntrance.text;
-                          var apartament = _controlleerApartament.text;
+                          var apartament = _controlleerApartment.text;
 
                           if (street.isEmpty) {
                             ScaffoldMessenger.of(context)
