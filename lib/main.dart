@@ -6,8 +6,7 @@ import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 
 import 'package:delikat_h_c_mobile/ui/widgets/screens/main_screen.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/screens/order_screen.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/splash_screen.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +29,7 @@ class MainApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Delikat Demo',
+        title: 'Delikat',
         theme: ThemeData(
           primaryColor: Colors.green,
           iconButtonTheme: const IconButtonThemeData(
@@ -44,9 +43,9 @@ class MainApp extends StatelessWidget {
         ),
         initialRoute: '/splash',
         routes: {
-          '/splash': (context) => SplashScreen(),
-          '/': (context) => MainScreen(),
-          '/order': (context) => OrderScreen(),
+          '/splash': (context) => const SplashScreen(),
+          '/': (context) => const MainScreen(),
+          '/order': (context) => const OrderScreen(),
         },
       ),
     );

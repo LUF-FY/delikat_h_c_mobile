@@ -1,4 +1,3 @@
-import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 
 class MainPageSelectionService extends ChangeNotifier {
@@ -14,7 +13,7 @@ class MainPageSelectionService extends ChangeNotifier {
     pageIndex = selectionIndex;
     pageController.animateToPage(
       pageIndex,
-      duration: Duration(milliseconds: 250),
+      duration: const Duration(milliseconds: 250),
       curve: Curves.linear,
     );
     notifyListeners();

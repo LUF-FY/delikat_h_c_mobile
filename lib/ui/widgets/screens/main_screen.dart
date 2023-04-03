@@ -1,21 +1,20 @@
 import 'package:delikat_h_c_mobile/domain/services/page_selection_service.dart';
-import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/main_pages/cart_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/main_pages/main_page.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/product_catalog_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainScreen extends StatefulWidget {
-  MainScreen({Key? key}) : super(key: key);
+  const MainScreen({Key? key}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+  @override
   void dispose() {
     context.read<MainPageSelectionService>().disposeController();
     super.dispose();
@@ -29,8 +28,8 @@ class _MainScreenState extends State<MainScreen> {
         backgroundColor: Utils.mainColor,
         centerTitle: true,
         title: const Text(
-          'Delikat',
-          style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+          'Деликат',
+          style: TextStyle(fontSize: 38.0, fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -41,17 +40,15 @@ class _MainScreenState extends State<MainScreen> {
                 return PageView(
                   onPageChanged: (index) => pss.setPageIndex(index),
                   controller: pss.pageController,
-                  children: [
+                  children: const [
                     MainPage(),
                     CartPage(),
-                    //Center(child: Text('main')),
-                    //Center(child: Text('cart')),
                   ],
                 );
               },
             ),
           ),
-          BottomBar(),
+          const BottomBar(),
         ],
       ),
     );
@@ -109,7 +106,7 @@ class CounterProductsInCart extends StatelessWidget {
         context.select((ShoppingCartService sc) => sc.cartProducts.length);
 
     if (countProductInCart == 0) {
-      return SizedBox();
+      return const SizedBox();
     }
 
     return Container(
@@ -122,7 +119,7 @@ class CounterProductsInCart extends StatelessWidget {
       child: Center(
         child: Text(
 // Нужно менять значение
-          '${countProductInCart}',
+          '$countProductInCart',
           style: const TextStyle(
             fontSize: 14.0,
             fontWeight: FontWeight.w800,
@@ -151,10 +148,12 @@ class CounterProductsInCart extends StatelessWidget {
 // }
 
 class BottomBar extends StatelessWidget {
+  const BottomBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: EdgeInsets.all(30),
+        padding: const EdgeInsets.all(30),
         child:
             Consumer<MainPageSelectionService>(builder: (context, pss, child) {
           return Row(

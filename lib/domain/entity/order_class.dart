@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/order_product.dart';
 
 class Order {
@@ -45,12 +43,12 @@ class Order {
   }
 
   void setAddressInfo(
-      String street, int house, int housing, int entrance, int apartament) {
+      String street, int house, int housing, int entrance, int apartment) {
     this.street = street;
     this.house = house;
     this.housing = housing;
     this.entrance = entrance;
-    this.apartment = apartament;
+    this.apartment = apartment;
   }
 
   static Order fromJson(Map<String, dynamic> json) => Order.allInfo(

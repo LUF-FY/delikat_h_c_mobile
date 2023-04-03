@@ -17,15 +17,15 @@ class ShoppingCartService extends ChangeNotifier {
     cartProducts
         .firstWhere((ci) => ci.product.id == cartItem.product.id)
         .quantity++;
-    print('${cartItem.quantity} inc');
+    //print('${cartItem.quantity} inc');
     notifyListeners();
   }
 
   void decItemQuantity({required CartItem cartItem}) {
-    var temp_ci =
+    var tempCi =
         cartProducts.firstWhere((ci) => ci.product.id == cartItem.product.id);
-    temp_ci.quantity = max(temp_ci.quantity - 1, 1);
-    print('${cartItem.quantity} dec');
+    tempCi.quantity = max(tempCi.quantity - 1, 1);
+    //print('${cartItem.quantity} dec');
     notifyListeners();
   }
 
@@ -60,9 +60,9 @@ class ShoppingCartService extends ChangeNotifier {
 
   double getTotal() {
     double cartTotal = 0.0;
-    cartProducts.forEach((element) {
+    for (var element in cartProducts) {
       cartTotal += element.product.price * element.quantity;
-    });
+    }
 
     return cartTotal;
   }

@@ -1,6 +1,4 @@
-import 'package:delikat_h_c_mobile/data.dart';
 import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
-import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_cart_widget.dart';
@@ -13,7 +11,7 @@ class CartPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductListView();
+    return const ProductListView();
   }
 }
 
@@ -45,14 +43,14 @@ class ProductListView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 cartSevice.cartProducts.isEmpty
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Total',
+                          const Text('Итого:',
                               style: TextStyle(color: Utils.mainDark)),
                           Text('₽${cartSevice.getTotal().toStringAsFixed(2)}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   color: Utils.mainDark,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30)),
@@ -60,10 +58,7 @@ class ProductListView extends StatelessWidget {
                       ),
                 IconTextButton(
                   disable: cartSevice.cartProducts.isEmpty,
-                  text: "checkout",
-                  //
-                  //Сделать переход на экран Order
-                  //
+                  text: "Заказать",
                   onTap: () {
                     context
                         .read<OrderService>()
