@@ -5,8 +5,10 @@ class MainPageSelectionService extends ChangeNotifier {
 
   final pageController = PageController();
 
-  void disposeController() {
+  @override
+  void dispose() {
     pageController.dispose();
+    super.dispose();
   }
 
   void setPageIndex(int selectionIndex) {

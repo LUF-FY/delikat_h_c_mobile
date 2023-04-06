@@ -5,14 +5,9 @@ import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+class OrderScreen extends StatelessWidget {
+  const OrderScreen({super.key});
 
-  @override
-  OrderScreenState createState() => OrderScreenState();
-}
-
-class OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

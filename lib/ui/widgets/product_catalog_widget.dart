@@ -4,6 +4,7 @@ import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductCatalogWidget extends StatelessWidget {
   const ProductCatalogWidget({
@@ -85,8 +86,10 @@ class ProductImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(5),
-      child: Image(
-        image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
+      child: CachedNetworkImage(
+        imageUrl: 'http://www.plus-pumba.ru/storage$img',
+        placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }

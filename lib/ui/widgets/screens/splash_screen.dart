@@ -8,10 +8,10 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var isLoaded = context.select((ProductService ps) => ps.isLoaded);
-    if (isLoaded) {
-      Navigator.of(context).pop();
-    }
+    context
+        .read<ProductService>()
+        .init()
+        .then((value) => Navigator.of(context).pushReplacementNamed('/'));
 
     return Scaffold(
       backgroundColor: Utils.mainColor,
