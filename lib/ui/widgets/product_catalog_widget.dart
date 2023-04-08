@@ -1,10 +1,11 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_price_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_Image_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_name_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductCatalogWidget extends StatelessWidget {
   const ProductCatalogWidget({
@@ -47,7 +48,10 @@ class ProductCatalogWidget extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: Center(
-                          child: ProductNameWidget(name: product.name),
+                          child: ProductNameWidget(
+                            name: product.name,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
@@ -72,60 +76,6 @@ class ProductCatalogWidget extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class ProductImageWidget extends StatelessWidget {
-  const ProductImageWidget({Key? key, required this.img}) : super(key: key);
-
-  final String img;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      child: CachedNetworkImage(
-        imageUrl: 'http://www.plus-pumba.ru/storage$img',
-        placeholder: (context, url) => CircularProgressIndicator(),
-        errorWidget: (context, url, error) => Icon(Icons.error),
-      ),
-    );
-  }
-}
-
-class ProductNameWidget extends StatelessWidget {
-  const ProductNameWidget({Key? key, required this.name}) : super(key: key);
-
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return AutoSizeText(
-      name,
-      maxLines: 1,
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w600,
-      ),
-    );
-  }
-}
-
-class ProductPriceWidget extends StatelessWidget {
-  const ProductPriceWidget({Key? key, required this.price}) : super(key: key);
-
-  final int price;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '$price₽',
-      style: const TextStyle(
-        color: Colors.green,
-        fontSize: 18,
-        fontWeight: FontWeight.w600,
       ),
     );
   }
@@ -163,75 +113,3 @@ class ProductCardBuyButton extends StatelessWidget {
     );
   }
 }
-
-// class ProductCardButtons extends StatelessWidget {
-//   ProductCardButtons({Key? key, required this.quantity, required this.cartItem})
-//       : super(key: key);
-
-//   int quantity;
-//   CartItem cartItem;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       height: 40,
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//         children: <Widget>[
-//           ProductCardQuantityChangeButton(
-//             text: '-',
-//             cartItem: cartItem,
-//           ),
-//           SizedBox(
-//             width: 40,
-//             child: Center(child: Text('$quantity')),
-//           ),
-//           ProductCardQuantityChangeButton(
-//             text: '+',
-//             cartItem: cartItem,
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class ProductCardQuantityChangeButton extends StatelessWidget {
-//   ProductCardQuantityChangeButton(
-//       {super.key, required this.text, required this.cartItem});
-//   String text;
-//   CartItem cartItem;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: 40.0,
-//       child: ElevatedButton(
-//         style: ButtonStyle(
-//           backgroundColor: MaterialStatePropertyAll(Colors.green),
-//         ),
-//         // maximumSize: MaterialStatePropertyAll(Size(18.0, 18.0))),
-//         child: Text(
-//           text,
-//           style: TextStyle(
-//             color: Colors.white,
-//             fontSize: 16,
-//           ),
-//         ),
-//         onPressed: () {
-//           if (text == '+') {
-//             context
-//                 .read<ShoppingCartService>()
-//                 .incItemQuantity(cartItem: cartItem);
-//           } else if (text == '-') {
-//             context
-//                 .read<ShoppingCartService>()
-//                 .decItemQuantity(cartItem: cartItem);
-//           }
-//         },
-//       ),
-//     );
-//   }
-// }
-
-

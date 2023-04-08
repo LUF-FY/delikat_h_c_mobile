@@ -1,5 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_price_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_Image_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_name_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +61,10 @@ class ProductCartWidget extends StatelessWidget {
                     children: [
                       SizedBox(
                         height: 24,
-                        child: ProductNameWidget(name: cartItem.product.name),
+                        child: ProductNameWidget(
+                          name: cartItem.product.name,
+                          fontSize: 15,
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
@@ -84,57 +91,6 @@ class ProductCartWidget extends StatelessWidget {
   }
 }
 
-class ProductImageWidget extends StatelessWidget {
-  const ProductImageWidget({Key? key, required this.img}) : super(key: key);
-
-  final String img;
-
-  @override
-  Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      child: Image(
-        image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
-      ),
-    );
-  }
-}
-
-class ProductNameWidget extends StatelessWidget {
-  const ProductNameWidget({Key? key, required this.name}) : super(key: key);
-
-  final String name;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      name,
-      style: const TextStyle(
-        fontSize: 15,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-}
-
-class ProductPriceWidget extends StatelessWidget {
-  const ProductPriceWidget({Key? key, required this.price}) : super(key: key);
-
-  final int price;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      '$price₽',
-      style: const TextStyle(
-        color: Utils.mainColor,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-      ),
-    );
-  }
-}
-
 class ProductCardButtonDelete extends StatelessWidget {
   const ProductCardButtonDelete({
     Key? key,
@@ -155,57 +111,6 @@ class ProductCardButtonDelete extends StatelessWidget {
         ));
   }
 }
-
-// class ProductCardBuyButton extends StatelessWidget {
-//   const ProductCardBuyButton({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ElevatedButton(
-//       style:
-//           ButtonStyle(backgroundColor: MaterialStatePropertyAll(Colors.green)),
-//       // child: const Icon(
-//       //   Icons.add_shopping_cart,
-//       //   size: 20,
-//       //   color: Colors.white,
-//       // ),
-//       child: const Text(
-//         "Buy",
-//         style: TextStyle(
-//           color: Colors.white,
-//           fontSize: 16,
-//         ),
-//       ),
-//       onPressed: () {},
-//     );
-//   }
-// }
-
-// class ProductCardQuantityChangeButton extends StatelessWidget {
-//   ProductCardQuantityChangeButton({super.key, required this.text});
-//   String text;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Container(
-//       width: 40.0,
-//       child: ElevatedButton(
-//         style: ButtonStyle(
-//           backgroundColor: MaterialStatePropertyAll(Colors.green),
-//         ),
-//         // maximumSize: MaterialStatePropertyAll(Size(18.0, 18.0))),
-//         child: Text(
-//           text,
-//           style: TextStyle(
-//             color: Colors.white,
-//             fontSize: 16,
-//           ),
-//         ),
-//         onPressed: () {},
-//       ),
-//     );
-//   }
-// }
 
 class ProductCardButtons extends StatelessWidget {
   const ProductCardButtons({Key? key, required this.cartItem})
