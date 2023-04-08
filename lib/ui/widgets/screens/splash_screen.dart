@@ -11,7 +11,7 @@ class SplashScreen extends StatelessWidget {
     context
         .read<ProductService>()
         .init()
-        .then((value) => Navigator.of(context).pushReplacementNamed('/'));
+        .then((value) => Navigator.of(context).pop());
 
     return Scaffold(
       backgroundColor: Utils.mainColor,
@@ -26,6 +26,12 @@ class SplashScreen extends StatelessWidget {
                   fontSize: 38.0,
                   fontWeight: FontWeight.bold,
                   color: Utils.mainTextColor),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            CircularProgressIndicator(
+              color: Utils.mainTextColor,
             ),
           ],
         ),

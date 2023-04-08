@@ -142,9 +142,10 @@ class BottomBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        padding: const EdgeInsets.all(30),
-        child:
-            Consumer<MainPageSelectionService>(builder: (context, pss, child) {
+        padding:
+            const EdgeInsets.only(left: 30, right: 30, bottom: 30, top: 10),
+        child: Consumer2<MainPageSelectionService, ShoppingCartService>(
+            builder: (context, pss, scs, child) {
           return Row(
               crossAxisAlignment: CrossAxisAlignment.end,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -154,28 +155,43 @@ class BottomBar extends StatelessWidget {
                         color: pss.pageIndex == 0
                             ? Utils.mainDark
                             : Utils.mainColor),
-                    onPressed: () {
-                      pss.setPageIndex(0);
-                    }),
-                IconButton(
-                    icon: Icon(Icons.shopping_cart,
-                        color: pss.pageIndex == 1
-                            ? Utils.mainDark
-                            : Utils.mainColor),
-                    onPressed: () {
-                      pss.setPageIndex(1);
-                    }),
+                    onPressed: () => pss.setPageIndex(0)),
+                SizedBox(
+                  height: 70,
+                ),
+                scs.cartProducts.isEmpty
+                    ? IconButton(
+                        icon: Icon(Icons.shopping_cart,
+                            color: pss.pageIndex == 1
+                                ? Utils.mainDark
+                                : Utils.mainColor),
+                        onPressed: () => pss.setPageIndex(1))
+                    : GestureDetector(
+                        onTap: () => pss.setPageIndex(1),
+                        child: Container(
+                          constraints: BoxConstraints(minHeight: 70),
+                          padding:
+                              EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                          decoration: BoxDecoration(
+                              color: pss.pageIndex == 1
+                                  ? Utils.mainDark
+                                  : Utils.mainColor,
+                              borderRadius: BorderRadius.circular(50)),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text('${scs.cartProducts.length}',
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14)),
+                              SizedBox(height: 10),
+                              Icon(Icons.shopping_cart, color: Colors.white)
+                            ],
+                          ),
+                        ),
+                      ),
               ]);
         }));
   }
 }
-
-// IconButton(
-//     icon: Icon(Icons.favorite,
-//         color: bottomBarSelectionService.tabSelection ==
-//                 'favorites'
-//             ? Utils.mainDark
-//             : Utils.mainColor),
-//     onPressed: () {
-//       bottomBarSelectionService.setTabSelection('favorites');
-//     }),
