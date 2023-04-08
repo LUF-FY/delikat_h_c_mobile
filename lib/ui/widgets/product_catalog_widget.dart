@@ -4,14 +4,15 @@ import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class ProductCatalogWidget extends StatelessWidget {
-  ProductCatalogWidget({
+  const ProductCatalogWidget({
     Key? key,
     required this.product,
   }) : super(key: key);
 
-  Product product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -84,14 +85,12 @@ class ProductImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      //child: Hero(
-      //tag: img,
-      //child: Image.asset('assets/$img.png'),
       borderRadius: BorderRadius.circular(5),
-      child: Image(
-        image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
+      child: CachedNetworkImage(
+        imageUrl: 'http://www.plus-pumba.ru/storage$img',
+        placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
-      //),
     );
   }
 }
@@ -122,7 +121,7 @@ class ProductPriceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      '${price}₽',
+      '$price₽',
       style: const TextStyle(
         color: Colors.green,
         fontSize: 18,
@@ -133,9 +132,9 @@ class ProductPriceWidget extends StatelessWidget {
 }
 
 class ProductCardBuyButton extends StatelessWidget {
-  ProductCardBuyButton({super.key, required this.product});
+  const ProductCardBuyButton({super.key, required this.product});
 
-  Product product;
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -153,7 +152,7 @@ class ProductCardBuyButton extends StatelessWidget {
               cartSevice.addToCart(product);
             },
       child: Text(
-        "Buy",
+        "Купить",
         style: TextStyle(
           color: cartSevice.isProductInCart(product)
               ? Utils.buttonDisableT

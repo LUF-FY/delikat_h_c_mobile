@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
@@ -6,88 +5,78 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ProductCartWidget extends StatelessWidget {
-  ProductCartWidget({
+  const ProductCartWidget({
     Key? key,
     required this.cartItem,
   }) : super(key: key);
 
-  CartItem cartItem;
+  final CartItem cartItem;
 
   @override
   Widget build(BuildContext context) {
-    // CartItem cartItem =
-    //     context.select((ShoppingCartService scs) => scs.cartProducts);
-
     return Padding(
-      // color: Colors.red,
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
-      child: Container(
-        //color: Colors.red,
-        child: GestureDetector(
-          // onTap: () {
-          //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-          //     return ProductDetail(
-          //       product: _product,
-          //     );
-          //   }));
-          // },
-          onTap: () {
-            print(cartItem.toString());
-          },
+      child: GestureDetector(
+        // onTap: () {
+        //   Navigator.push(context, MaterialPageRoute(builder: (context) {
+        //     return ProductDetail(
+        //       product: _product,
+        //     );
+        //   }));
+        // },
+        onTap: () {
+          print(cartItem.toString());
+        },
 
-          child: Card(
-            elevation: 2,
-            shadowColor: Colors.green,
-            color: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                  height: 80,
-                  width: 80,
-                  padding: const EdgeInsets.all(8.0),
-                  child: ProductImageWidget(
-                    img: cartItem.product.image,
-                  ),
+        child: Card(
+          elevation: 2,
+          shadowColor: Colors.green,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 80,
+                width: 80,
+                padding: const EdgeInsets.all(8.0),
+                child: ProductImageWidget(
+                  img: cartItem.product.image,
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Container(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 24,
-                            child:
-                                ProductNameWidget(name: cartItem.product.name),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(5),
-                            child: ProductPriceWidget(
-                                price: cartItem.product.price),
-                          ),
-                          ProductCardButtons(cartItem: cartItem),
-                        ],
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 24,
+                        child: ProductNameWidget(name: cartItem.product.name),
                       ),
-                    ),
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(5),
+                        child:
+                            ProductPriceWidget(price: cartItem.product.price),
+                      ),
+                      ProductCardButtons(cartItem: cartItem),
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                ProductCardButtonDelete(cartItem: cartItem),
-              ],
-            ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              ProductCardButtonDelete(cartItem: cartItem),
+            ],
           ),
         ),
       ),
@@ -103,14 +92,10 @@ class ProductImageWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      //child: Hero(
-      //tag: img,
-      //child: Image.asset('assets/$img.png'),
       borderRadius: BorderRadius.circular(5),
       child: Image(
         image: NetworkImage('http://www.plus-pumba.ru/storage$img'),
       ),
-      //),
     );
   }
 }
@@ -142,7 +127,7 @@ class ProductPriceWidget extends StatelessWidget {
     return Text(
       '$price₽',
       style: const TextStyle(
-        color: Colors.green,
+        color: Utils.mainColor,
         fontSize: 18,
         fontWeight: FontWeight.bold,
       ),
@@ -151,12 +136,12 @@ class ProductPriceWidget extends StatelessWidget {
 }
 
 class ProductCardButtonDelete extends StatelessWidget {
-  ProductCardButtonDelete({
+  const ProductCardButtonDelete({
     Key? key,
     required this.cartItem,
   }) : super(key: key);
 
-  CartItem cartItem;
+  final CartItem cartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -164,7 +149,7 @@ class ProductCardButtonDelete extends StatelessWidget {
         onPressed: () => context
             .read<ShoppingCartService>()
             .removeFromCart(cartItem: cartItem),
-        icon: Icon(
+        icon: const Icon(
           Icons.delete_forever,
           color: Utils.mainColor,
         ));
@@ -223,9 +208,10 @@ class ProductCardButtonDelete extends StatelessWidget {
 // }
 
 class ProductCardButtons extends StatelessWidget {
-  ProductCardButtons({Key? key, required this.cartItem}) : super(key: key);
+  const ProductCardButtons({Key? key, required this.cartItem})
+      : super(key: key);
 
-  CartItem cartItem;
+  final CartItem cartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -250,24 +236,23 @@ class ProductCardButtons extends StatelessWidget {
 }
 
 class ProductCardQuantityChangeButton extends StatelessWidget {
-  ProductCardQuantityChangeButton(
+  const ProductCardQuantityChangeButton(
       {super.key, required this.text, required this.cartItem});
-  String text;
-  CartItem cartItem;
+  final String text;
+  final CartItem cartItem;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       width: 40.0,
       child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Colors.green),
+        style: const ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(Utils.mainColor),
         ),
-        // maximumSize: MaterialStatePropertyAll(Size(18.0, 18.0))),
         child: Text(
           text,
-          style: TextStyle(
-            color: Colors.white,
+          style: const TextStyle(
+            color: Utils.mainTextColor,
             fontSize: 16,
           ),
         ),

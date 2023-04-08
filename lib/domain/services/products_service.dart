@@ -10,17 +10,15 @@ class ProductService extends ChangeNotifier {
   bool _isLoaded = false;
   bool get isLoaded => _isLoaded;
 
-  ProductService() {
-    init();
-  }
+  ProductService();
 
-  init() async {
-    await LoadValue();
+  Future<void> init() async {
+    await loadValue();
     _isLoaded = true;
     notifyListeners();
   }
 
-  Future<void> LoadValue() async {
+  Future<void> loadValue() async {
     _productsList = await _productDataProvider.featchProducts();
     notifyListeners();
   }

@@ -1,18 +1,13 @@
 import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.dart';
-import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/oreder_pages/order_address_info_page.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/oreder_pages/order_personal_info_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class OrderScreen extends StatefulWidget {
-  const OrderScreen({Key? key}) : super(key: key);
+class OrderScreen extends StatelessWidget {
+  const OrderScreen({super.key});
 
-  @override
-  _OrderScreenState createState() => _OrderScreenState();
-}
-
-class _OrderScreenState extends State<OrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,31 +23,21 @@ class _OrderScreenState extends State<OrderScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Padding(
-          //   padding: const EdgeInsets.all(10),
-          //   child: const Text("Ordering",
-          //       style: TextStyle(color: Utils.mainDark, fontSize: 30)),
-          // ),
           Expanded(
             child: Consumer<OrderPageSelectionService>(
               builder: (context, pss, child) {
                 return PageView(
                   onPageChanged: (index) => pss.setPageIndex(index),
                   controller: pss.pageController,
-                  children: [
-                    const PersonalInfoPage(),
-                    const AddressInfoPage(),
-                  ],
                   physics: const NeverScrollableScrollPhysics(),
+                  children: const [
+                    PersonalInfoPage(),
+                    AddressInfoPage(),
+                  ],
                 );
               },
             ),
           ),
-          // Padding(
-          //     padding: const EdgeInsets.all(10),
-          //     child: Row(
-          //       children: [],
-          //     )),
         ],
       ),
     );
@@ -110,11 +95,6 @@ class PersonalInfoPage extends StatelessWidget {
                         disable: false,
                         text: "Далее",
                         onTap: () {
-                          // _controlleerEmail.text = "jojo@list.ru";
-                          // _controlleerFirstName.text = "Jorno";
-                          // _controlleerLastName.text = "Jovana";
-                          // _controlleerPhoneNumber.text = "89991345678";
-
                           var email = _controlleerEmail.text;
                           var firstName = _controlleerFirstName.text;
                           var lastName = _controlleerLastName.text;
@@ -169,7 +149,7 @@ class AddressInfoPage extends StatelessWidget {
     var _controlleerHouse = TextEditingController();
     var _controlleerHousing = TextEditingController();
     var _controlleerEntrance = TextEditingController();
-    var _controlleerApartment = TextEditingController();
+    var _controlleerApartament = TextEditingController();
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -202,7 +182,7 @@ class AddressInfoPage extends StatelessWidget {
               ),
               OrderTextField(
                 placeholder: "Номер квартиры",
-                controller: _controlleerApartment,
+                controller: _controlleerApartament,
               ),
               Align(
                 alignment: Alignment.bottomCenter,
@@ -219,17 +199,11 @@ class AddressInfoPage extends StatelessWidget {
                         disable: false,
                         text: "Подтвердить",
                         onTap: () {
-                          // _controlleerStreet.text = "Мира";
-                          // _controlleerHouse.text = "1";
-                          // _controlleerHousing.text = "2";
-                          // _controlleerEntrance.text = "3";
-                          // _controlleerApartment.text = "4";
-
                           var street = _controlleerStreet.text;
                           var house = _controlleerHouse.text;
                           var housing = _controlleerHousing.text;
                           var entrance = _controlleerEntrance.text;
-                          var apartament = _controlleerApartment.text;
+                          var apartament = _controlleerApartament.text;
 
                           if (street.isEmpty) {
                             ScaffoldMessenger.of(context)

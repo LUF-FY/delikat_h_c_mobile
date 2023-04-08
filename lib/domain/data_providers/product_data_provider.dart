@@ -26,7 +26,7 @@ class ProductDataProvider {
       print(e);
     }
 
-    if (products.length == 0) {
+    if (products.isEmpty) {
       products = productData;
     }
 

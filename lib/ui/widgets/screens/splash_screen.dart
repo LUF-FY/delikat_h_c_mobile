@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatelessWidget {
-  SplashScreen({Key? key}) : super(key: key);
-
-  // var _isSplashScreenBuilt = false;
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var _isLoaded = context.select((ProductService ps) => ps.isLoaded);
-    if (_isLoaded) {
-      Navigator.of(context).pop();
-    }
+    context
+        .read<ProductService>()
+        .init()
+        .then((value) => Navigator.of(context).pushReplacementNamed('/'));
 
     return Scaffold(
       backgroundColor: Utils.mainColor,
@@ -23,8 +21,11 @@ class SplashScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             Text(
-              'Delikat',
-              style: TextStyle(fontSize: 36.0, fontWeight: FontWeight.bold),
+              'Деликат',
+              style: TextStyle(
+                  fontSize: 38.0,
+                  fontWeight: FontWeight.bold,
+                  color: Utils.mainTextColor),
             ),
           ],
         ),

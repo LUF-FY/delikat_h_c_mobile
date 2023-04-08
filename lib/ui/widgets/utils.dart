@@ -9,4 +9,6 @@ class Utils {
   static const Color buttonDisableBG = Color(0xFFEEEEEE);
   static const Color buttonDisableT = Colors.grey;
   static const Color buttonEnableT = Colors.white;
+  static const Color mainTextColor = Colors.white;
+  static const Color mainDarkTextColor = Colors.black;
 }
