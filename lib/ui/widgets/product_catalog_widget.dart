@@ -21,8 +21,8 @@ class ProductCatalogWidget extends StatelessWidget {
       onTap: () {
         print(product.toString());
       },
-      child: SizedBox(
-        height: 250,
+      child: Container(
+        height: 260,
         child: Card(
           elevation: 2,
           shadowColor: Colors.green,
@@ -38,9 +38,11 @@ class ProductCatalogWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: ProductImageWidget(img: product.image),
               ),
-              SizedBox(
-                height: 100,
+              Container(
+                margin: EdgeInsets.symmetric(horizontal: 8),
+                height: 110,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Divider(height: 6),
                     SizedBox(
@@ -55,8 +57,9 @@ class ProductCatalogWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
                           height: 24,
@@ -99,7 +102,7 @@ class ProductCardBuyButton extends StatelessWidget {
       onPressed: cartSevice.isProductInCart(product)
           ? null
           : () {
-              cartSevice.addToCart(product);
+              cartSevice.addToCart(product, context);
             },
       child: Text(
         "Купить",

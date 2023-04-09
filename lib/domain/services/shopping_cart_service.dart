@@ -8,20 +8,32 @@ class ShoppingCartService extends ChangeNotifier {
   List<CartItem> cartProducts = [];
   final int _defoltQuantity = 1;
 
-  void addToCart(Product product) {
-    cartProducts.add(CartItem(product: product, quantity: _defoltQuantity));
-    notifyListeners();
+  void addToCart(Product product, BuildContext context) {
+    if (getTotal() + product.price > 1000000) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Превышено ограничение по сумме заказа'),
+      ));
+    } else {
+      cartProducts.add(CartItem(product: product, quantity: _defoltQuantity));
+      notifyListeners();
+    }
   }
 
-  void incItemQuantity({required CartItem cartItem}) {
-    cartProducts
-        .firstWhere((ci) => ci.product.id == cartItem.product.id)
-        .quantity++;
-    //print('${cartItem.quantity} inc');
-    notifyListeners();
+  void incItemQuantity(CartItem cartItem, BuildContext context) {
+    if (getTotal() + cartItem.product.price > 1000000) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Превышено ограничение по сумме заказа'),
+      ));
+    } else {
+      cartProducts
+          .firstWhere((ci) => ci.product.id == cartItem.product.id)
+          .quantity++;
+      //print('${cartItem.quantity} inc');
+      notifyListeners();
+    }
   }
 
-  void decItemQuantity({required CartItem cartItem}) {
+  void decItemQuantity(CartItem cartItem) {
     var tempCi =
         cartProducts.firstWhere((ci) => ci.product.id == cartItem.product.id);
     tempCi.quantity = max(tempCi.quantity - 1, 1);
@@ -29,7 +41,7 @@ class ShoppingCartService extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeFromCart({required CartItem cartItem}) {
+  void removeFromCart(CartItem cartItem) {
     cartProducts.removeWhere((ci) => ci.product.id == cartItem.product.id);
     notifyListeners();
   }

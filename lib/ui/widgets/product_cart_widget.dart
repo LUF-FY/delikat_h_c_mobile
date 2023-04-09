@@ -102,9 +102,8 @@ class ProductCardButtonDelete extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        onPressed: () => context
-            .read<ShoppingCartService>()
-            .removeFromCart(cartItem: cartItem),
+        onPressed: () =>
+            context.read<ShoppingCartService>().removeFromCart(cartItem),
         icon: const Icon(
           Icons.delete_forever,
           color: Utils.mainColor,
@@ -165,11 +164,9 @@ class ProductCardQuantityChangeButton extends StatelessWidget {
           if (text == '+') {
             context
                 .read<ShoppingCartService>()
-                .incItemQuantity(cartItem: cartItem);
+                .incItemQuantity(cartItem, context);
           } else if (text == '-') {
-            context
-                .read<ShoppingCartService>()
-                .decItemQuantity(cartItem: cartItem);
+            context.read<ShoppingCartService>().decItemQuantity(cartItem);
           }
         },
       ),

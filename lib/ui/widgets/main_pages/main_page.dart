@@ -19,19 +19,22 @@ class ProductGridView extends StatelessWidget {
   Widget build(BuildContext context) {
     final productList = context.select((ProductService ps) => ps.productsList);
 
-    return GridView.builder(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        mainAxisSpacing: 10,
-        crossAxisSpacing: 10,
-        crossAxisCount: 2,
-        childAspectRatio: 0.6,
+    return RefreshIndicator(
+      onRefresh: () => context.read<ProductService>().init(),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          crossAxisCount: 2,
+          childAspectRatio: 0.6,
+        ),
+        itemBuilder: (context, index) {
+          return ProductCatalogWidget(
+            product: productList[index],
+          );
+        },
+        itemCount: productList.length,
       ),
-      itemBuilder: (context, index) {
-        return ProductCatalogWidget(
-          product: productList[index],
-        );
-      },
-      itemCount: productList.length,
     );
   }
 }

@@ -49,7 +49,7 @@ class ProductListView extends StatelessWidget {
                         children: [
                           const Text('Итого:',
                               style: TextStyle(color: Utils.mainDark)),
-                          Text('₽${cartSevice.getTotal().toStringAsFixed(2)}',
+                          Text('${cartSevice.getTotal().toStringAsFixed(2)} ₽',
                               style: const TextStyle(
                                   color: Utils.mainDark,
                                   fontWeight: FontWeight.bold,
