@@ -60,9 +60,9 @@ class ProductListView extends StatelessWidget {
                   disable: cartSevice.cartProducts.isEmpty,
                   text: "Заказать",
                   onTap: () {
-                    context
-                        .read<OrderService>()
-                        .setOrderProducts(cartSevice.cartProducts);
+                    var os = context.read<OrderService>();
+                    os.setOrderProducts(cartSevice.cartProducts);
+                    os.setTotalOrderPrice(cartSevice.getTotal());
                     Navigator.of(context).pushNamed('/order');
                   },
                   //

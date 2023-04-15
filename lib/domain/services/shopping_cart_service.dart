@@ -51,8 +51,8 @@ class ShoppingCartService extends ChangeNotifier {
     notifyListeners();
   }
 
-  double getTotal() {
-    double cartTotal = 0.0;
+  num getTotal() {
+    num cartTotal = 0.0;
     for (var element in cartProducts) {
       cartTotal += element.product.price * element.quantity;
     }

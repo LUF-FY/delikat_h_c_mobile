@@ -10,6 +10,7 @@ class Order {
   int? housing;
   int? entrance;
   int? apartment;
+  num? total;
   List<OrderProduct>? orderProducts;
 
   Order();
@@ -31,6 +32,7 @@ class Order {
     required this.housing,
     required this.entrance,
     required this.apartment,
+    required this.total,
     required this.orderProducts,
   });
 
@@ -51,6 +53,14 @@ class Order {
     this.apartment = apartment;
   }
 
+  void setOrderProducts(List<OrderProduct> orderProducts) {
+    this.orderProducts = orderProducts;
+  }
+
+  void setTotal(num total) {
+    this.total = total;
+  }
+
   static Order fromJson(Map<String, dynamic> json) => Order.allInfo(
         email: json['email'] as String,
         firstName: json['first_name'] as String,
@@ -61,6 +71,7 @@ class Order {
         housing: json['housing'] as int,
         entrance: json['entrance'] as int,
         apartment: json['apartment'] as int,
+        total: json['total'] as num,
         orderProducts: (json['order_products'] as List<dynamic>)
             .map((e) => OrderProduct.fromJson(e as Map<String, dynamic>))
             .toList(),
@@ -84,6 +95,7 @@ class Order {
       'housing': instance.housing,
       'entrance': instance.entrance,
       'apartment': instance.apartment,
+      'total': instance.total,
       'order_products': orderProducts,
     };
   }

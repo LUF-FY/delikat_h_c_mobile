@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:ffi';
 
 import 'package:json_annotation/json_annotation.dart';
@@ -15,9 +16,9 @@ class Product {
   Product({
     required this.id,
     required this.name,
-    required this.price,
     required this.image,
     required this.description,
+    required this.price,
   });
 
   @override
@@ -25,10 +26,28 @@ class Product {
     return 'Product(id: $id,\n name: $name,\n image: $image,\n description: $description,\n price: $price)';
   }
 
+  static num _validatePriceFromJson(dynamic price) {
+    num? tempPrice;
+    if (price is String) {
+      print('Price - это Строка');
+      tempPrice = num.tryParse(price);
+    } else if (price is num) {
+      print('Price - это Число');
+      tempPrice = price;
+    } else {
+      Exception('Price type in JSON is not correct.');
+    }
+
+    if (tempPrice == null) {
+      Exception('Incorrect price parsing. price will be null');
+    }
+    return tempPrice ?? 0;
+  }
+
   static Product fromJson(Map<String, dynamic> json) => Product(
         id: json['id'] as int,
         name: json['name'] as String,
-        price: json['price'],
+        price: _validatePriceFromJson(json['price']),
         image: json['image'] as String,
         description: json['description'] as String,
       );

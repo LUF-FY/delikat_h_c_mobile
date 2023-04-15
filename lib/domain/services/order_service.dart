@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:delikat_h_c_mobile/domain/data_providers/order_data_provider.dart';
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/order_class.dart';
@@ -41,8 +43,11 @@ class OrderService extends ChangeNotifier {
     for (var ci in cartitems) {
       orderProducts.add(OrderProduct.fromCartitem(ci));
     }
+    order.setOrderProducts(orderProducts);
+  }
 
-    order.orderProducts = orderProducts;
+  void setTotalOrderPrice(num total) {
+    order.setTotal(total);
   }
 
   Future<void> sendOrder() async {
