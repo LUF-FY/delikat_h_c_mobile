@@ -6,6 +6,7 @@ import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_Image
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_name_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class ProductCartWidget extends StatelessWidget {
@@ -129,6 +130,7 @@ class ProductCardButtons extends StatelessWidget {
         SizedBox(
           width: 40,
           child: Center(child: Text('${cartItem.quantity}')),
+          // child: ProductCartQuantityTextField(cartItem: cartItem,),
         ),
         ProductCardQuantityChangeButton(
           text: '+',
@@ -169,6 +171,32 @@ class ProductCardQuantityChangeButton extends StatelessWidget {
             context.read<ShoppingCartService>().decItemQuantity(cartItem);
           }
         },
+      ),
+    );
+  }
+}
+
+class ProductCartQuantityTextField extends StatelessWidget {
+  const ProductCartQuantityTextField({Key? key, required this.cartItem})
+      : super(key: key);
+
+  final CartItem cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: TextField(
+        controller: TextEditingController(),
+        onSubmitted: (value) {
+          int quantity = int.tryParse(value) ?? 1;
+          context
+              .read<ShoppingCartService>()
+              .changeItemQuantity(cartItem, quantity, context);
+        },
+        keyboardType: TextInputType.number,
+        inputFormatters: <TextInputFormatter>[
+          FilteringTextInputFormatter.digitsOnly
+        ],
       ),
     );
   }

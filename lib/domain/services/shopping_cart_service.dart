@@ -11,7 +11,8 @@ class ShoppingCartService extends ChangeNotifier {
   void addToCart(Product product, BuildContext context) {
     if (getTotal() + product.price > 1000000) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Превышено ограничение по сумме заказа'),
+        content:
+            Text('Превышено ограничение по сумме заказа, максимум 1000000'),
       ));
     } else {
       cartProducts.add(CartItem(product: product, quantity: _defoltQuantity));
@@ -19,10 +20,29 @@ class ShoppingCartService extends ChangeNotifier {
     }
   }
 
+  bool changeItemQuantity(
+      CartItem cartItem, int quantity, BuildContext context) {
+    if (getTotal() + cartItem.product.price * quantity > 1000000) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content:
+            Text('Превышено ограничение по сумме заказа, максимум 1000000'),
+      ));
+      return false;
+    } else {
+      cartProducts
+          .firstWhere((ci) => ci.product.id == cartItem.product.id)
+          .quantity = quantity;
+      //print('${cartItem.quantity} change');
+      notifyListeners();
+      return true;
+    }
+  }
+
   void incItemQuantity(CartItem cartItem, BuildContext context) {
     if (getTotal() + cartItem.product.price > 1000000) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Превышено ограничение по сумме заказа'),
+        content:
+            Text('Превышено ограничение по сумме заказа, максимум 1000000'),
       ));
     } else {
       cartProducts
