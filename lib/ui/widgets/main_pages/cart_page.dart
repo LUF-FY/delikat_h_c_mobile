@@ -27,14 +27,33 @@ class ProductListView extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              itemCount: cartSevice.cartProducts.length,
-              itemBuilder: (context, index) {
-                return ProductCartWidget(
-                  cartItem: cartSevice.cartProducts[index],
-                );
-              },
-            ),
+            child: cartSevice.cartProducts.isEmpty
+                ? Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: const [
+                      Icon(
+                        Icons.remove_shopping_cart,
+                        color: Colors.grey,
+                        size: 100,
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "Корзина пуста\nДобавьте товары чтобы оформить заказ",
+                        style: TextStyle(color: Colors.grey, fontSize: 14),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  )
+                : ListView.builder(
+                    itemCount: cartSevice.cartProducts.length,
+                    itemBuilder: (context, index) {
+                      return ProductCartWidget(
+                        cartItem: cartSevice.cartProducts[index],
+                      );
+                    },
+                  ),
           ),
           Padding(
             padding: const EdgeInsets.only(top: 4.0),
