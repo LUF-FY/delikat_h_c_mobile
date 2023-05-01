@@ -1,8 +1,10 @@
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_buy_button_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_price_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_Image_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_name_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/screens/product_description_screen.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -19,7 +21,11 @@ class ProductCatalogWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        print(product.toString());
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) =>
+                    ProductDescriptionScreen(product: product)));
       },
       child: Container(
         height: 260,
@@ -42,6 +48,7 @@ class ProductCatalogWidget extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 height: 110,
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Divider(height: 6),
@@ -65,7 +72,10 @@ class ProductCatalogWidget extends StatelessWidget {
                           height: 24,
                           child: Padding(
                             padding: const EdgeInsets.all(2.0),
-                            child: ProductPriceWidget(price: product.price),
+                            child: ProductPriceWidget(
+                              price: product.price,
+                              fontSize: 18,
+                            ),
                           ),
                         ),
                         ProductCardBuyButton(
@@ -78,39 +88,6 @@ class ProductCatalogWidget extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class ProductCardBuyButton extends StatelessWidget {
-  const ProductCardBuyButton({super.key, required this.product});
-
-  final Product product;
-
-  @override
-  Widget build(BuildContext context) {
-    var cartSevice = context.watch<ShoppingCartService>();
-
-    return ElevatedButton(
-      style: ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(
-              cartSevice.isProductInCart(product)
-                  ? Utils.buttonDisableBG
-                  : Utils.mainColor)),
-      onPressed: cartSevice.isProductInCart(product)
-          ? null
-          : () {
-              cartSevice.addToCart(product, context);
-            },
-      child: Text(
-        "Купить",
-        style: TextStyle(
-          color: cartSevice.isProductInCart(product)
-              ? Utils.buttonDisableT
-              : Utils.buttonEnableT,
-          fontSize: 16,
         ),
       ),
     );

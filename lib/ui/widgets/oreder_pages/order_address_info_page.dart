@@ -110,7 +110,7 @@ class AddressInfoPage extends StatelessWidget {
                               context.read<OrderService>().sendOrder();
                               context
                                   .read<OrderPageSelectionService>()
-                                  .setPageIndex(1);
+                                  .setPageIndex(2);
                               print("OK");
                             }
                           }

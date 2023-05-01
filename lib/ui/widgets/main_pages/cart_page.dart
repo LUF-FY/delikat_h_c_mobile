@@ -65,7 +65,6 @@ class ProductListView extends StatelessWidget {
                     os.setTotalOrderPrice(cartSevice.getTotal());
                     Navigator.of(context).pushNamed('/order');
                   },
-                  //
                   iconData: Icons.shopping_cart_checkout,
                 )
               ],

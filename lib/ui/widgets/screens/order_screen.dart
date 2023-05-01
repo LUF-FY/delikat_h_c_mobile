@@ -1,5 +1,6 @@
 import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/oreder_pages/order_address_info_page.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/oreder_pages/order_complete_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/oreder_pages/order_personal_info_page.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,7 @@ class OrderScreen extends StatelessWidget {
                   children: const [
                     PersonalInfoPage(),
                     AddressInfoPage(),
+                    CompletePage(),
                   ],
                 );
               },

@@ -4,6 +4,7 @@ import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_price_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_Image_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_name_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/screens/product_description_screen.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,17 +23,13 @@ class ProductCartWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
       child: GestureDetector(
-        // onTap: () {
-        //   Navigator.push(context, MaterialPageRoute(builder: (context) {
-        //     return ProductDetail(
-        //       product: _product,
-        //     );
-        //   }));
-        // },
         onTap: () {
-          print(cartItem.toString());
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      ProductDescriptionScreen(product: cartItem.product)));
         },
-
         child: Card(
           elevation: 2,
           shadowColor: Colors.green,
@@ -58,22 +55,22 @@ class ProductCartWidget extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        height: 24,
-                        child: ProductNameWidget(
-                          name: cartItem.product.name,
-                          fontSize: 15,
-                        ),
+                      ProductNameWidget(
+                        name: cartItem.product.name,
+                        fontSize: 15,
                       ),
                       const SizedBox(
                         height: 5,
                       ),
                       Padding(
                         padding: const EdgeInsets.all(5),
-                        child:
-                            ProductPriceWidget(price: cartItem.product.price),
+                        child: ProductPriceWidget(
+                          price: cartItem.product.price,
+                          fontSize: 18,
+                        ),
                       ),
                       ProductCardButtons(cartItem: cartItem),
                     ],
