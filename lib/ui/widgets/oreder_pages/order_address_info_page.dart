@@ -75,8 +75,11 @@ class AddressInfoPage extends StatelessWidget {
 
                           if (TextValidator.validate(
                                   street, 'Заполните поле Улица', context) &&
-                              TextValidator.validate(house,
-                                  'Заполните поле Номер дома', context) &&
+                              NumValidator.validate(
+                                  house,
+                                  'Заполните поле Номер дома',
+                                  'Поле Номер дома должно состоять из цифр',
+                                  context) &&
                               NumValidator.validate(
                                   housing,
                                   'Заполните поле Корпус',
