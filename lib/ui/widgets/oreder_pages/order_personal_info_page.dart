@@ -62,12 +62,12 @@ class PersonalInfoPage extends StatelessWidget {
                           var phoneNumber = controlleerPhoneNumber.text.trim();
                           var email = controlleerEmail.text.trim();
 
-                          if (PhoneValidator.validate(phoneNumber, context) &&
-                              MyEmailValidator.validate(email, context) &&
-                              TextValidator.validate(
+                          if (TextValidator.validate(
                                   firstName, 'Заполните поле Имя', context) &&
                               TextValidator.validate(lastName,
-                                  'Заполните поле Фамилия', context)) {
+                                  'Заполните поле Фамилия', context) &&
+                              MyEmailValidator.validate(email, context) &&
+                              PhoneValidator.validate(phoneNumber, context)) {
                             context.read<OrderService>().setPersonalInfo(
                                 email,
                                 firstName.capitalize(),

@@ -1,5 +1,6 @@
 import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
+import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/extentions.dart';
 import 'package:delikat_h_c_mobile/order_text_field_validators.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
@@ -108,6 +109,7 @@ class AddressInfoPage extends StatelessWidget {
                               ));
                             } else {
                               context.read<OrderService>().sendOrder();
+                              context.read<ShoppingCartService>().clearCart();
                               context
                                   .read<OrderPageSelectionService>()
                                   .setPageIndex(2);
