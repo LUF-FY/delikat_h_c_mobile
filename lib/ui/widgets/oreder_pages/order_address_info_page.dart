@@ -1,5 +1,7 @@
 import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
+import 'package:delikat_h_c_mobile/extentions.dart';
+import 'package:delikat_h_c_mobile/order_text_field_validators.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/order_text_field.dart';
 import 'package:flutter/material.dart';
@@ -64,42 +66,37 @@ class AddressInfoPage extends StatelessWidget {
                         disable: false,
                         text: "Подтвердить",
                         onTap: () {
-                          var street = controlleerStreet.text;
-                          var house = controlleerHouse.text;
-                          var housing = controlleerHousing.text;
-                          var entrance = controlleerEntrance.text;
-                          var apartament = controlleerApartament.text;
+                          var street = controlleerStreet.text.trim();
+                          var house = controlleerHouse.text.trim();
+                          var housing = controlleerHousing.text
+                              .trim(); // Возможно может присутствовать бука в номере
+                          var entrance = controlleerEntrance.text.trim();
+                          var apartment = controlleerApartament.text.trim();
 
-                          if (street.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Улица'),
-                            ));
-                          } else if (house.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Номер дома'),
-                            ));
-                          } else if (housing.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Корпус'),
-                            ));
-                          } else if (entrance.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Номер подезда'),
-                            ));
-                          } else if (apartament.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Номер квартиры'),
-                            ));
-                          } else {
+                          if (TextValidator.validate(
+                                  street, 'Заполните поле Улица', context) &&
+                              TextValidator.validate(house,
+                                  'Заполните поле Номер дома', context) &&
+                              NumValidator.validate(
+                                  housing,
+                                  'Заполните поле Корпус',
+                                  'Поле Корпус должно состоять из цифр',
+                                  context) &&
+                              NumValidator.validate(
+                                  entrance,
+                                  'Заполните поле Номер подезда',
+                                  'Поле Номер подезда должно состоять из цифр',
+                                  context) &&
+                              NumValidator.validate(
+                                  apartment,
+                                  'Заполните поле Номер квартиры',
+                                  'Поле Номер квартиры должно состоять из цифр',
+                                  context)) {
                             var massage = context
                                 .read<OrderService>()
-                                .setAddressInfo(street, house, housing,
-                                    entrance, apartament);
+                                .setAddressInfo(street.capitalize(), house,
+                                    housing, entrance, apartment);
+
                             if (massage != null) {
                               ScaffoldMessenger.of(context)
                                   .showSnackBar(SnackBar(

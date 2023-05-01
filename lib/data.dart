@@ -4,18 +4,17 @@ import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 final List<Product> productData = [
   Product(
     id: 1,
-    name: 'Эрик будущий депутат',
-    price: 0,
+    name: 'Мыло',
+    price: 135.00,
     image: '',
-    description: 'Любит тяночек',
+    description: '',
   ),
   Product(
     id: 2,
-    name: 'OLINA',
-    price: 6,
+    name: 'Зубная паста',
+    price: 299.90,
     image: '',
-    description:
-        ',Хочет пони минижирафа самоеда корги много денег дом квартиру машину еще машину и еще дом и еще квартиру и поездить по миру но ничего не делатьа почему а потому что ВОВА КУПИ',
+    description: '',
   ),
 ];
 

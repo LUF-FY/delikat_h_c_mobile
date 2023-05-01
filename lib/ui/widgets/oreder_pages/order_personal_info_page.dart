@@ -1,5 +1,7 @@
 import 'package:delikat_h_c_mobile/domain/services/order_page_selection_service.dart';
 import 'package:delikat_h_c_mobile/domain/services/order_service.dart';
+import 'package:delikat_h_c_mobile/extentions.dart';
+import 'package:delikat_h_c_mobile/order_text_field_validators.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/icon_text_button.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/order_text_field.dart';
 import 'package:flutter/material.dart';
@@ -29,10 +31,6 @@ class PersonalInfoPage extends StatelessWidget {
                     style: TextStyle(color: Colors.grey, fontSize: 18)),
               ),
               OrderTextField(
-                placeholder: "Электронная почта",
-                controller: controlleerEmail,
-              ),
-              OrderTextField(
                 placeholder: "Имя",
                 controller: controlleerFirstName,
               ),
@@ -41,9 +39,12 @@ class PersonalInfoPage extends StatelessWidget {
                 controller: controlleerLastName,
               ),
               OrderTextField(
-                placeholder: "Номер телефона",
-                controller: controlleerPhoneNumber,
+                placeholder: "Электронная почта",
+                controller: controlleerEmail,
               ),
+              OrderTextField(
+                  placeholder: "Номер телефона",
+                  controller: controlleerPhoneNumber),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Row(
@@ -56,34 +57,22 @@ class PersonalInfoPage extends StatelessWidget {
                         disable: false,
                         text: "Далее",
                         onTap: () {
-                          var email = controlleerEmail.text;
-                          var firstName = controlleerFirstName.text;
-                          var lastName = controlleerLastName.text;
-                          var phoneNumber = controlleerPhoneNumber.text;
+                          var firstName = controlleerFirstName.text.trim();
+                          var lastName = controlleerLastName.text.trim();
+                          var phoneNumber = controlleerPhoneNumber.text.trim();
+                          var email = controlleerEmail.text.trim();
 
-                          if (email.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Электронная почта'),
-                            ));
-                          } else if (firstName.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Имя'),
-                            ));
-                          } else if (lastName.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Фамилия'),
-                            ));
-                          } else if (phoneNumber.isEmpty) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text('Заполните поле Номер телефона'),
-                            ));
-                          } else {
+                          if (PhoneValidator.validate(phoneNumber, context) &&
+                              MyEmailValidator.validate(email, context) &&
+                              TextValidator.validate(
+                                  firstName, 'Заполните поле Имя', context) &&
+                              TextValidator.validate(lastName,
+                                  'Заполните поле Фамилия', context)) {
                             context.read<OrderService>().setPersonalInfo(
-                                email, firstName, lastName, phoneNumber);
+                                email,
+                                firstName.capitalize(),
+                                lastName.capitalize(),
+                                phoneNumber);
 
                             context
                                 .read<OrderPageSelectionService>()
