@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 class ProductService extends ChangeNotifier {
   final _productDataProvider = ProductDataProvider();
 
-
   List<Product> _productsList = [];
   List<Product> get productsList => _productsList;
 
@@ -14,7 +13,7 @@ class ProductService extends ChangeNotifier {
   bool get isLoaded => _isLoaded;
 
   List<ProductsCategory> _productsCategoriesList = [];
-
+  List<ProductsCategory> get productsCategoriesList => _productsCategoriesList;
   //получение айди категории
 
   ProductService();
@@ -26,7 +25,8 @@ class ProductService extends ChangeNotifier {
   }
 
   Future<void> loadCategories() async {
-    _productsCategoriesList = await _productDataProvider.featchProductsCategories();
+    _productsCategoriesList =
+        await _productDataProvider.featchProductsCategories();
     notifyListeners();
   }
 
