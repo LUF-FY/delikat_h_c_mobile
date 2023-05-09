@@ -24,7 +24,7 @@ class ProductCardBuyButton extends StatelessWidget {
           backgroundColor: MaterialStatePropertyAll(
               cartSevice.isProductInCart(product)
                   ? Utils.buttonDisableBG
-                  : Utils.mainColor)),
+                  : Utils.mainGreen)),
       onPressed: cartSevice.isProductInCart(product)
           ? null
           : () {

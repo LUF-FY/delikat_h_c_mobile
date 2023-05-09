@@ -21,10 +21,10 @@ class IconTextButton extends StatelessWidget {
       borderRadius: BorderRadius.circular(30),
       child: Material(
         color:
-            disable ? Utils.buttonDisableBG : Utils.mainColor.withOpacity(0.2),
+            disable ? Utils.buttonDisableBG : Utils.mainGreen.withOpacity(0.2),
         child: InkWell(
-          splashColor: Utils.mainDark.withOpacity(0.2),
-          highlightColor: Utils.mainDark.withOpacity(0.5),
+          splashColor: Utils.mainGreenDark.withOpacity(0.2),
+          highlightColor: Utils.mainGreenDark.withOpacity(0.5),
           onTap: disable
               ? null
               : () {
@@ -40,14 +40,16 @@ class IconTextButton extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 4.0),
                         child: Icon(
                           iconData,
-                          color:
-                              disable ? Utils.buttonDisableT : Utils.mainDark,
+                          color: disable
+                              ? Utils.buttonDisableT
+                              : Utils.mainGreenDark,
                         ),
                       ),
                 Text(
                   text,
                   style: TextStyle(
-                      color: disable ? Utils.buttonDisableT : Utils.mainDark),
+                      color:
+                          disable ? Utils.buttonDisableT : Utils.mainGreenDark),
                 )
               ],
             ),

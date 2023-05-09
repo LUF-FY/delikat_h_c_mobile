@@ -14,7 +14,7 @@ class ProductPriceWidget extends StatelessWidget {
     return Text(
       '${price.toStringAsFixed(2)} ₽',
       style: TextStyle(
-        color: Utils.mainColor,
+        color: Utils.mainGreen,
         fontSize: fontSize,
         fontWeight: FontWeight.bold,
       ),

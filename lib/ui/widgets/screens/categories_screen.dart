@@ -1,5 +1,6 @@
 import 'package:delikat_h_c_mobile/domain/entity/products_category_class.dart';
 import 'package:delikat_h_c_mobile/domain/services/products_service.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/Image_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Utils.mainColor,
+        backgroundColor: Utils.mainGreen,
         centerTitle: true,
         title: const Text(
           'Деликат',
@@ -25,14 +26,14 @@ class CategoriesScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          RefreshIndicator(
-            onRefresh: () => context.read<ProductService>().init(),
+          //Text(categoriesList[0].name),
+          Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 mainAxisSpacing: 10,
                 crossAxisSpacing: 10,
                 crossAxisCount: 2,
-                childAspectRatio: 0.6,
+                childAspectRatio: 1.1,
               ),
               itemBuilder: (context, index) {
                 return ProductCategoryWidget(
@@ -56,6 +57,51 @@ class ProductCategoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(productsCategory.name);
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+      child: GestureDetector(
+        onTap: () {
+          final ps = context.read<ProductService>();
+          ps.setCategoryId(productsCategory.id);
+          ps.loadProducts().then((_) => Navigator.pushNamed(context, '/main'));
+        },
+        child: Card(
+          elevation: 2,
+          shadowColor: Colors.green,
+          color: Colors.white,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 100,
+                width: 100,
+                padding: const EdgeInsets.all(8.0),
+                child: ImageWidget(
+                  img: productsCategory.image,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Text(
+                    productsCategory.category,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

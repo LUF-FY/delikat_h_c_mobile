@@ -14,7 +14,7 @@ class OrderScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Utils.mainColor,
+        backgroundColor: Utils.mainGreen,
         centerTitle: true,
         title: const Text(
           'Оформление заказа',

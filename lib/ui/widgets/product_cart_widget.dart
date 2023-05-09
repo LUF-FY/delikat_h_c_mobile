@@ -104,7 +104,7 @@ class ProductCardButtonDelete extends StatelessWidget {
             context.read<ShoppingCartService>().removeFromCart(cartItem),
         icon: const Icon(
           Icons.delete_forever,
-          color: Utils.mainColor,
+          color: Utils.mainGreen,
         ));
   }
 }
@@ -150,12 +150,12 @@ class ProductCardQuantityChangeButton extends StatelessWidget {
       width: 40.0,
       child: ElevatedButton(
         style: const ButtonStyle(
-          backgroundColor: MaterialStatePropertyAll(Utils.mainColor),
+          backgroundColor: MaterialStatePropertyAll(Utils.mainGreen),
         ),
         child: Text(
           text,
           style: const TextStyle(
-            color: Utils.mainTextColor,
+            color: Utils.mainWhite,
             fontSize: 16,
           ),
         ),

@@ -11,10 +11,10 @@ class SplashScreen extends StatelessWidget {
     context
         .read<ProductService>()
         .init()
-        .then((value) => Navigator.of(context).pop());
+        .then((_) => Navigator.of(context).pop());
 
     return Scaffold(
-      backgroundColor: Utils.mainColor,
+      backgroundColor: Utils.mainGreen,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -25,13 +25,13 @@ class SplashScreen extends StatelessWidget {
               style: TextStyle(
                   fontSize: 38.0,
                   fontWeight: FontWeight.bold,
-                  color: Utils.mainTextColor),
+                  color: Utils.mainWhite),
             ),
             SizedBox(
               height: 10,
             ),
             CircularProgressIndicator(
-              color: Utils.mainTextColor,
+              color: Utils.mainWhite,
             ),
           ],
         ),

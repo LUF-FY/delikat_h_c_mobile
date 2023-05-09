@@ -14,7 +14,7 @@ class MainScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Utils.mainColor,
+        backgroundColor: Utils.mainGreen,
         centerTitle: true,
         title: const Text(
           'Деликат',
@@ -153,8 +153,8 @@ class BottomBar extends StatelessWidget {
                 IconButton(
                     icon: Icon(Icons.trip_origin,
                         color: pss.pageIndex == 0
-                            ? Utils.mainDark
-                            : Utils.mainColor),
+                            ? Utils.mainGreenDark
+                            : Utils.mainGreen),
                     onPressed: () => pss.setPageIndex(0)),
                 SizedBox(
                   height: 70,
@@ -163,8 +163,8 @@ class BottomBar extends StatelessWidget {
                     ? IconButton(
                         icon: Icon(Icons.shopping_cart,
                             color: pss.pageIndex == 1
-                                ? Utils.mainDark
-                                : Utils.mainColor),
+                                ? Utils.mainGreenDark
+                                : Utils.mainGreen),
                         onPressed: () => pss.setPageIndex(1))
                     : GestureDetector(
                         onTap: () => pss.setPageIndex(1),
@@ -174,8 +174,8 @@ class BottomBar extends StatelessWidget {
                               EdgeInsets.only(left: 10, right: 10, bottom: 10),
                           decoration: BoxDecoration(
                               color: pss.pageIndex == 1
-                                  ? Utils.mainDark
-                                  : Utils.mainColor,
+                                  ? Utils.mainGreenDark
+                                  : Utils.mainGreen,
                               borderRadius: BorderRadius.circular(50)),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.end,
