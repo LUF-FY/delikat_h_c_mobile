@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
-import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_Image_widget.dart';
+import 'package:delikat_h_c_mobile/ui/widgets/Image_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_buy_button_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_name_widget.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/product_card_widgets/product_price_widget.dart';
@@ -32,7 +32,7 @@ class ProductDescriptionScreen extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: ProductImageWidget(img: product.image),
+              child: ImageWidget(img: product.image),
             ),
             const Divider(height: 10),
             Expanded(
