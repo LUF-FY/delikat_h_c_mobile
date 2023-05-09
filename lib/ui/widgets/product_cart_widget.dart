@@ -120,7 +120,7 @@ class ProductCardButtons extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        ProductCardQuantityChangeButton(
+        ProductCardQuantityDecButton(
           text: '-',
           cartItem: cartItem,
         ),
@@ -129,7 +129,7 @@ class ProductCardButtons extends StatelessWidget {
           child: Center(child: Text('${cartItem.quantity}')),
           // child: ProductCartQuantityTextField(cartItem: cartItem,),
         ),
-        ProductCardQuantityChangeButton(
+        ProductCardQuantityIncButton(
           text: '+',
           cartItem: cartItem,
         ),
@@ -138,8 +138,8 @@ class ProductCardButtons extends StatelessWidget {
   }
 }
 
-class ProductCardQuantityChangeButton extends StatelessWidget {
-  const ProductCardQuantityChangeButton(
+class ProductCardQuantityIncButton extends StatelessWidget {
+  const ProductCardQuantityIncButton(
       {super.key, required this.text, required this.cartItem});
   final String text;
   final CartItem cartItem;
@@ -160,19 +160,47 @@ class ProductCardQuantityChangeButton extends StatelessWidget {
           ),
         ),
         onPressed: () {
-          if (text == '+') {
-            context
-                .read<ShoppingCartService>()
-                .incItemQuantity(cartItem, context);
-          } else if (text == '-') {
-            context.read<ShoppingCartService>().decItemQuantity(cartItem);
-          }
+          context
+              .read<ShoppingCartService>()
+              .incItemQuantity(cartItem, context);
         },
       ),
     );
   }
 }
 
+class ProductCardQuantityDecButton extends StatelessWidget {
+  const ProductCardQuantityDecButton(
+      {super.key, required this.text, required this.cartItem});
+  final String text;
+  final CartItem cartItem;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40.0,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor: MaterialStatePropertyAll(
+              cartItem.quantity == 1 ? Utils.buttonDisableBG : Utils.mainGreen),
+        ),
+        child: Text(
+          text,
+          style: TextStyle(
+            color:
+                cartItem.quantity == 1 ? Utils.buttonDisableT : Utils.mainWhite,
+            fontSize: 16,
+          ),
+        ),
+        onPressed: () {
+          context.read<ShoppingCartService>().decItemQuantity(cartItem);
+        },
+      ),
+    );
+  }
+}
+
+// not using
 class ProductCartQuantityTextField extends StatelessWidget {
   const ProductCartQuantityTextField({Key? key, required this.cartItem})
       : super(key: key);

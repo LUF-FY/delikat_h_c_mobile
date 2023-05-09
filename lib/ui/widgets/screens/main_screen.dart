@@ -11,6 +11,8 @@ class MainScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<MainPageSelectionService>().pageIndex = 0;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,

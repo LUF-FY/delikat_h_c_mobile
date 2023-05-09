@@ -1,3 +1,4 @@
+import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:delikat_h_c_mobile/domain/services/shopping_cart_service.dart';
 import 'package:delikat_h_c_mobile/ui/widgets/utils.dart';
@@ -26,19 +27,28 @@ class ProductCardBuyButton extends StatelessWidget {
                   ? Utils.buttonDisableBG
                   : Utils.mainGreen)),
       onPressed: cartSevice.isProductInCart(product)
-          ? null
+          ? () {
+              cartSevice
+                  .removeFromCart(CartItem(product: product, quantity: 0));
+            }
           : () {
               cartSevice.addToCart(product, context);
             },
-      child: Text(
-        "Купить",
-        style: TextStyle(
-          color: cartSevice.isProductInCart(product)
-              ? Utils.buttonDisableT
-              : Utils.buttonEnableT,
-          fontSize: 16,
-        ),
-      ),
+      child: cartSevice.isProductInCart(product)
+          ? Text(
+              "Отменить",
+              style: TextStyle(
+                color: Utils.buttonCancelT,
+                fontSize: 16,
+              ),
+            )
+          : Text(
+              "В корзину",
+              style: TextStyle(
+                color: Utils.buttonEnableT,
+                fontSize: 16,
+              ),
+            ),
     );
   }
 }
