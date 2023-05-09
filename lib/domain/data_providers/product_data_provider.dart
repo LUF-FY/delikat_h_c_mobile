@@ -27,7 +27,7 @@ class ProductDataProvider {
     }
 
     if (products.isEmpty) {
-      products = productData;
+      //products = productData;
     }
 
     return products;
@@ -53,7 +53,7 @@ class ProductDataProvider {
     }
 
     if (products.isEmpty) {
-      products = productData;
+      //products = productData;
     }
 
     return products;
@@ -62,14 +62,15 @@ class ProductDataProvider {
   Future<List<ProductsCategory>> featchProductsCategories() async {
     List<ProductsCategory> categories = [];
     try {
-      var url = Uri.http('www.plus-pumba.ru', 'products/productCategories');
+      var url = Uri.http('www.plus-pumba.ru', 'productCategories');
+      print(url);
       var response = await http.get(url);
       print('Response status: ${response.statusCode}');
       print('Response body: ${response.body}');
       if (response.statusCode == 200) {
         var categoriesJson = json.decode(response.body);
-        for (var productJson in categoriesJson) {
-          var prodCat = ProductsCategory.fromJson(productJson);
+        for (var categoryJson in categoriesJson) {
+          var prodCat = ProductsCategory.fromJson(categoryJson);
           print(prodCat);
           categories.add(prodCat);
         }

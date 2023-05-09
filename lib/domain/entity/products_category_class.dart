@@ -1,60 +1,52 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class ProductsCategory {
   final int id;
   final String image;
-  final String name;
+  final String category;
 
-  ProductsCategory(
-    this.id,
-    this.image,
-    this.name,
-  );
+  ProductsCategory({
+    required this.id,
+    required this.image,
+    required this.category,
+  });
 
   ProductsCategory copyWith({
     int? id,
     String? image,
-    String? name,
+    String? category,
   }) {
     return ProductsCategory(
-      id ?? this.id,
-      image ?? this.image,
-      name ?? this.name,
+      id: id ?? this.id,
+      image: image ?? this.image,
+      category: category ?? this.category,
     );
   }
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'image': image,
-      'name': name,
-    };
-  }
+  static ProductsCategory fromJson(Map<String, dynamic> json) =>
+      ProductsCategory(
+        id: json['id'] as int,
+        image: json['image'] as String,
+        category: json['category'] as String,
+      );
 
-  factory ProductsCategory.fromMap(Map<String, dynamic> map) {
-    return ProductsCategory(
-      map['id'] as int,
-      map['image'] as String,
-      map['name'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory ProductsCategory.fromJson(String source) =>
-      ProductsCategory.fromMap(source as Map<String, dynamic>);
+  static Map<String, dynamic> toJson(ProductsCategory instance) =>
+      <String, dynamic>{
+        'id': instance.id,
+        'image': instance.image,
+        'category': instance.category,
+      };
 
   @override
-  String toString() => 'Category(id: $id, image: $image, name: $name)';
+  String toString() => 'Category(id: $id, image: $image, category: $category)';
 
   @override
   bool operator ==(covariant ProductsCategory other) {
     if (identical(this, other)) return true;
 
-    return other.id == id && other.image == image && other.name == name;
+    return other.id == id && other.image == image && other.category == category;
   }
 
   @override
-  int get hashCode => id.hashCode ^ image.hashCode ^ name.hashCode;
+  int get hashCode => id.hashCode ^ image.hashCode ^ category.hashCode;
 }

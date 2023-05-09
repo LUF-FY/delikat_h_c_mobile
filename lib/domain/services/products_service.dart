@@ -15,6 +15,14 @@ class ProductService extends ChangeNotifier {
   List<ProductsCategory> _productsCategoriesList = [];
   List<ProductsCategory> get productsCategoriesList => _productsCategoriesList;
   //получение айди категории
+  int _categoryId = 0;
+  int get categoryId => _categoryId;
+
+  void setCategoryId(int id) {
+    _categoryId = id;
+    print("id: $id");
+    notifyListeners();
+  }
 
   ProductService();
 
@@ -30,13 +38,24 @@ class ProductService extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> loadAllProducts() async {
-    _productsList = await _productDataProvider.featchAllProducts();
+  Future<void> loadProducts() async {
+    print("load id: $_categoryId");
+    if (_categoryId != 0) {
+      _productsList =
+          await _productDataProvider.featchProductsByCategory(_categoryId);
+    } else {
+      _productsList = await _productDataProvider.featchAllProducts();
+    }
     notifyListeners();
   }
 
-  Future<void> loadProductsByCategory(int id) async {
-    _productsList = await _productDataProvider.featchProductsByCategory(id);
-    notifyListeners();
-  }
+  // Future<void> loadAllProducts() async {
+  //   _productsList = await _productDataProvider.featchAllProducts();
+  //   notifyListeners();
+  // }
+
+  // Future<void> loadProductsByCategory(int id) async {
+  //   _productsList = await _productDataProvider.featchProductsByCategory(id);
+  //   notifyListeners();
+  // }
 }

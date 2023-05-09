@@ -28,24 +28,7 @@ class ProductListView extends StatelessWidget {
         children: [
           Expanded(
             child: cartSevice.cartProducts.isEmpty
-                ? Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const [
-                      Icon(
-                        Icons.remove_shopping_cart,
-                        color: Colors.grey,
-                        size: 100,
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Text(
-                        "Корзина пуста\nДобавьте товары чтобы оформить заказ",
-                        style: TextStyle(color: Colors.grey, fontSize: 14),
-                        textAlign: TextAlign.center,
-                      ),
-                    ],
-                  )
+                ? EmptyCartWidget()
                 : ListView.builder(
                     itemCount: cartSevice.cartProducts.length,
                     itemBuilder: (context, index) {
@@ -67,10 +50,10 @@ class ProductListView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text('Итого:',
-                              style: TextStyle(color: Utils.mainDark)),
+                              style: TextStyle(color: Utils.mainGreenDark)),
                           Text('${cartSevice.getTotal().toStringAsFixed(2)} ₽',
                               style: const TextStyle(
-                                  color: Utils.mainDark,
+                                  color: Utils.mainGreenDark,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30)),
                         ],
@@ -82,7 +65,7 @@ class ProductListView extends StatelessWidget {
                     var os = context.read<OrderService>();
                     os.setOrderProducts(cartSevice.cartProducts);
                     os.setTotalOrderPrice(cartSevice.getTotal());
-                    Navigator.of(context).pushNamed('/order');
+                    Navigator.of(context).pushNamed('/main/order');
                   },
                   iconData: Icons.shopping_cart_checkout,
                 )
@@ -91,6 +74,33 @@ class ProductListView extends StatelessWidget {
           )
         ],
       ),
+    );
+  }
+}
+
+class EmptyCartWidget extends StatelessWidget {
+  const EmptyCartWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: const [
+        Icon(
+          Icons.remove_shopping_cart,
+          color: Colors.grey,
+          size: 100,
+        ),
+        SizedBox(
+          height: 15,
+        ),
+        Text(
+          "Корзина пуста\nДобавьте товары чтобы оформить заказ",
+          style: TextStyle(color: Colors.grey, fontSize: 14),
+          textAlign: TextAlign.center,
+        ),
+      ],
     );
   }
 }
