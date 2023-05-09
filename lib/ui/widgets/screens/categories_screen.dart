@@ -24,26 +24,51 @@ class CategoriesScreen extends StatelessWidget {
           style: TextStyle(fontSize: 38.0, fontWeight: FontWeight.bold),
         ),
       ),
-      body: Column(
-        children: [
-          //Text(categoriesList[0].name),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 10,
-                crossAxisCount: 2,
-                childAspectRatio: 1.1,
-              ),
-              itemBuilder: (context, index) {
-                return ProductCategoryWidget(
-                  productsCategory: categoriesList[index],
-                );
-              },
-              itemCount: categoriesList.length,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            PromotionBar(),
+            Text(
+              'Выберите категорию товаров:',
+              style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.w500),
             ),
-          ),
-        ],
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  mainAxisSpacing: 10,
+                  crossAxisSpacing: 10,
+                  crossAxisCount: 2,
+                  childAspectRatio: 1.1,
+                ),
+                itemBuilder: (context, index) {
+                  return ProductCategoryWidget(
+                    productsCategory: categoriesList[index],
+                  );
+                },
+                itemCount: categoriesList.length,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class PromotionBar extends StatelessWidget {
+  const PromotionBar({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Container(
+        height: 80,
+        child: ImageWidget(
+          img: '/images/products/original/beautiful.jpg',
+          fit: BoxFit.fitHeight,
+        ),
       ),
     );
   }
@@ -80,6 +105,7 @@ class ProductCategoryWidget extends StatelessWidget {
                 width: 100,
                 padding: const EdgeInsets.all(8.0),
                 child: ImageWidget(
+                  fit: BoxFit.fitHeight,
                   img: productsCategory.image,
                 ),
               ),

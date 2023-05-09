@@ -31,17 +31,6 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Delikat',
-        // theme: ThemeData(
-        //   primaryColor: Colors.green,
-        //   iconButtonTheme: const IconButtonThemeData(
-        //       style: ButtonStyle(
-        //     iconColor: MaterialStatePropertyAll<Color>(Colors.green),
-        //   )),
-        //   textTheme: const TextTheme(
-        //     titleLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-        //     bodyMedium: TextStyle(fontSize: 14.0, fontWeight: FontWeight.w800),
-        //   ),
-        // ),
         initialRoute: '/splash',
         routes: {
           '/splash': (context) => const SplashScreen(),
