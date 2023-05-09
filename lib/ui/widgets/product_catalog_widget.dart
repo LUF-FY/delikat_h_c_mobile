@@ -42,7 +42,10 @@ class ProductCatalogWidget extends StatelessWidget {
               Container(
                 height: 150,
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: ImageWidget(img: product.image),
+                child: ImageWidget(
+                  img: product.image,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 8),

@@ -46,6 +46,7 @@ class ProductCartWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: ImageWidget(
                   img: cartItem.product.image,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
               const SizedBox(

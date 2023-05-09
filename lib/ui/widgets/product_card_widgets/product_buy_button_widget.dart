@@ -35,14 +35,14 @@ class ProductCardBuyButton extends StatelessWidget {
               cartSevice.addToCart(product, context);
             },
       child: cartSevice.isProductInCart(product)
-          ? Text(
-              "Отменить",
+          ? const Text(
+              "Удалить",
               style: TextStyle(
                 color: Utils.buttonCancelT,
                 fontSize: 16,
               ),
             )
-          : Text(
+          : const Text(
               "В корзину",
               style: TextStyle(
                 color: Utils.buttonEnableT,
