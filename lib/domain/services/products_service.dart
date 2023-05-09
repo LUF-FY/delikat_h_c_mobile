@@ -1,3 +1,4 @@
+import 'package:delikat_h_c_mobile/data.dart';
 import 'package:delikat_h_c_mobile/domain/data_providers/product_data_provider.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
 import 'package:delikat_h_c_mobile/domain/entity/products_category_class.dart';
@@ -35,6 +36,7 @@ class ProductService extends ChangeNotifier {
   Future<void> loadCategories() async {
     _productsCategoriesList =
         await _productDataProvider.featchProductsCategories();
+    _productsCategoriesList.insert(0, allProductsCategory);
     notifyListeners();
   }
 

@@ -19,12 +19,10 @@ class ProductGridView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ps = context.watch<ProductService>();
-    ps.loadProducts();
-    final productList = ps.productsList;
+    final productList = context.select((ProductService ps) => ps.productsList);
 
     return RefreshIndicator(
-      onRefresh: () => ps.loadProducts(),
+      onRefresh: () => context.read<ProductService>().loadProducts(),
       child: Column(
         children: [
           CatalogCategoryBar(),
@@ -90,12 +88,11 @@ class CatalogCategoryBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ps = context.read<ProductService>();
+    final productsCategoriesList =
+        context.select((ProductService ps) => ps.productsCategoriesList);
+    final selectedCategoryId =
+        context.select((ProductService ps) => ps.categoryId);
 
-    final productsCategoriesList = ps.productsCategoriesList;
-    //context.select((ProductService ps) => ps.productsCategoriesList);
-    final selectedCategoryId = ps.categoryId;
-    //context.select((ProductService ps) => ps.categoryId);
     return Padding(
       padding: EdgeInsets.all(8),
       child: SizedBox(

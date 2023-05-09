@@ -1,5 +1,6 @@
 import 'package:delikat_h_c_mobile/domain/entity/cart_item.dart';
 import 'package:delikat_h_c_mobile/domain/entity/product_class.dart';
+import 'package:delikat_h_c_mobile/domain/entity/products_category_class.dart';
 
 final List<Product> productData = [
   Product(
@@ -28,3 +29,8 @@ final List<CartItem> cartItemData = [
     quantity: 2,
   ),
 ];
+
+final ProductsCategory allProductsCategory = ProductsCategory(
+    id: 0,
+    image: '/images/products/original/houes_hold.jpg',
+    category: 'Все товары');
