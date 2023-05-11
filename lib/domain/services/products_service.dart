@@ -36,7 +36,8 @@ class ProductService extends ChangeNotifier {
   Future<void> loadCategories() async {
     _productsCategoriesList =
         await _productDataProvider.featchProductsCategories();
-    _productsCategoriesList.insert(0, allProductsCategory);
+    if (_productsCategoriesList.isNotEmpty)
+      _productsCategoriesList.insert(0, allProductsCategory);
     notifyListeners();
   }
 

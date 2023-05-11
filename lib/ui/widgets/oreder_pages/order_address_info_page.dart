@@ -45,7 +45,7 @@ class AddressInfoPage extends StatelessWidget {
                 controller: controlleerHousing,
               ),
               OrderTextField(
-                placeholder: "Номер подезда",
+                placeholder: "Номер подъезда",
                 controller: controlleerEntrance,
               ),
               OrderTextField(
@@ -88,8 +88,8 @@ class AddressInfoPage extends StatelessWidget {
                                   context) &&
                               NumValidator.validate(
                                   entrance,
-                                  'Заполните поле Номер подезда',
-                                  'Поле Номер подезда должно состоять из цифр',
+                                  'Заполните поле Номер подъезда',
+                                  'Поле Номер подъезда должно состоять из цифр',
                                   context) &&
                               NumValidator.validate(
                                   apartment,
